@@ -3,16 +3,16 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
-subtitle:
-description:
-author: John Doe
-language:
-timezone:
+title: hello,world!
+subtitle: 不死小强
+description: 出来混好几年了，感觉应该写点什么。写给自己的博客！
+author: 小强
+language: zh-CN
+timezone: beijing
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://yoursite.com
+url: https://wang12.github.io
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -21,6 +21,7 @@ permalink_defaults:
 source_dir: source
 public_dir: public
 tag_dir: tags
+about_dir: about
 archive_dir: archives
 category_dir: categories
 code_dir: downloads/code
@@ -47,7 +48,6 @@ highlight:
 default_category: uncategorized
 category_map:
 tag_map:
-
 # Date / Time format
 ## Hexo uses Moment.js to parse and display date
 ## You can customize the date format as defined in
