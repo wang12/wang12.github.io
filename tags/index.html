@@ -3,14 +3,14 @@
 <html lang="Android JAVA">
 <head>
   <meta charset="UTF-8">
-  
+  <meta property="wb:webmaster" content="c8610306d00c0e13" />
     <title>tags | hello,world!</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
-    
-    <meta name="author" content="小强">
-    
 
-    
+    <meta name="author" content="小强">
+
+
+
     <meta name="description" content="出来混好几年了，感觉应该写点什么。写给自己的博客！">
 <meta property="og:type" content="website">
 <meta property="og:title" content="tags">
@@ -22,28 +22,28 @@
 <meta name="twitter:title" content="tags">
 <meta name="twitter:description" content="出来混好几年了，感觉应该写点什么。写给自己的博客！">
 
-    
+
     <link rel="alternative" href="/atom.xml" title="hello,world!" type="application/atom+xml">
-    
-    
+
+
     <link rel="icon" href="/img/logo.png">
-    
-    
+
+
     <link rel="apple-touch-icon" href="/img/jacman.jpg">
     <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
-    
+
     <link rel="stylesheet" href="/css/style.css">
 </head>
 
     <body>
       <header>
-        
+
 <div>
-		
+
 			<div id="imglogo">
 				<a href="/"><img src="/img/logo.png" alt="hello,world!" title="hello,world!"/></a>
 			</div>
-			
+
 			<div id="textlogo">
 				<h1 class="site-name"><a href="/" title="hello,world!">hello,world!</a></h1>
 				<h2 class="blog-motto">不死小强</h2>
@@ -53,20 +53,20 @@
 			<nav class="animated">
 				<ul>
 					<ul>
-					 
+
 						<li><a href="/">首页</a></li>
-					
+
 						<li><a href="/archives">分类</a></li>
-					
+
 						<li><a href="/about">关于</a></li>
-					
+
 					<li>
- 					
+
 						<form class="search" action="https://www.baidu.com/" target="_blank">
 							<label>Search</label>
 						<input name="s" type="hidden" value= null ><input type="text" name="q" size="30" placeholder="Search"><br>
 						</form>
-					
+
 					</li>
 				</ul>
 			</nav>
@@ -74,7 +74,7 @@
 
       </header>
       <div id="container">
-          
+
 <div class="archive-title" >
 <h2 class="tag-icon">Tags</h2>
 
@@ -92,38 +92,38 @@
 
       </div>
       <footer><div id="footer" >
-	
+
 	<div class="line">
 		<span></span>
 		<div class="author"></div>
 	</div>
-	
-	
+
+
 	<section class="info">
 		<p>  IT小强,希望每天都开心 <br/>
 			写给自己的博客</p>
 	</section>
-	 
+
 	<div class="social-font" class="clearfix">
-		
+
 		<a href="http://weibo.com/3535012745" target="_blank" class="icon-weibo" title="微博"></a>
-		
-		
+
+
 		<a href="https://github.com/827498077@qq.com" target="_blank" class="icon-github" title="github"></a>
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
+
+
+
+
+
+
+
+
 		<a href="mailto:827498077@qq.com" target="_blank" class="icon-email" title="Email Me"></a>
-		
+
 	</div>
-			
-		
+
+
 
 		<p class="copyright">
 	 	 博客创建日期 @ 2016.11.05 19:00
@@ -136,7 +136,7 @@
 <script src="/js/jquery.qrcode-0.12.0.min.js"></script>
 
 <script type="text/javascript">
-$(document).ready(function(){ 
+$(document).ready(function(){
   $('.navbar').click(function(){
     $('header nav').toggleClass('shownav');
   });
@@ -159,22 +159,22 @@ $(document).ready(function(){
   });
   o.click(function(){
     o.css('display', 'none').removeClass('beforeFadeIn');
-    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');
     m.removeClass('moveMain');
   });
   $(window).scroll(function(){
     o.css("top",Math.max(80,260-$(this).scrollTop()));
   });
-  
+
   $(window).resize(function(){
-    getSize(); 
+    getSize();
     if (myWidth >= 1024) {
       $('header nav').removeClass('shownav');
     }else{
       m.removeClass('moveMain');
       a.css('display', 'block').removeClass('fadeOut');
       o.css('display', 'none');
-        
+
     }
   });
 });
@@ -189,7 +189,7 @@ $(document).ready(function(){
 
 
 <script type="text/javascript">
-$(document).ready(function(){ 
+$(document).ready(function(){
   var list    = $('.archive-title a'),
       box     = $('.all-list-box'),
       first   = $('.archive-title a:first-of-type');
@@ -201,16 +201,16 @@ $(document).ready(function(){
       box.load(listSrc);
       list.removeClass('current');
       $(this).addClass('current');
-     });  
+     });
     });
-  }); 
+  });
 </script>
 
 
 <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
 <script src="/fancybox/jquery.fancybox.pack.js"></script>
 <script type="text/javascript">
-$(document).ready(function(){ 
+$(document).ready(function(){
   $('.article-content').each(function(i){
     $(this).find('img').each(function(){
       if ($(this).parent().hasClass('fancybox')) return;
@@ -225,7 +225,7 @@ $(document).ready(function(){
   if($.fancybox){
     $('.fancybox').fancybox();
   }
-}); 
+});
 </script>
 
 
@@ -239,7 +239,7 @@ var _hmt = _hmt || [];
 (function() {
   var hm = document.createElement("script");
   hm.src = "//hm.baidu.com/hm.js?26cff7ff569b956a445199e85c2a0e30";
-  var s = document.getElementsByTagName("script")[0]; 
+  var s = document.getElementsByTagName("script")[0];
   s.parentNode.insertBefore(hm, s);
 })();
 </script>

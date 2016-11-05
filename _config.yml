@@ -70,3 +70,12 @@ deploy:
   type: git
   repo: https://github.com/wang12/wang12.github.io.git
   branch: master
+
+stylus:
+  compress: true
+
+
+feed:
+  type: atom
+  path: atom.xml
+  limit: 20
