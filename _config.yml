@@ -8,7 +8,7 @@ subtitle: 不死小强
 description: 出来混好几年了，感觉应该写点什么。写给自己的博客！
 author: 小强
 language: zh-CN
-timezone: beijing
+timezone: Asia/Shanghai
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
@@ -70,6 +70,7 @@ deploy:
   type: git
   repo: https://github.com/wang12/wang12.github.io.git
   branch: master
+
 
 stylus:
   compress: true
