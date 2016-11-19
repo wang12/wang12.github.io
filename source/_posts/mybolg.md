@@ -1,7 +1,7 @@
 ---
 title: 博客操作命令
 date: 2016-11-18 21:11:47
-tags: other
+categories: other
 ---
 # 博客操作命令
 
@@ -19,7 +19,7 @@ tags: other
 |hexo new “”|新建文章||
 |hexo new page ""|新建页面||
 |hexo help|查看帮助||
-
+|hexo new photo "your titile"|建立图片类型的页面||
 ## markdown 操作命令
 
 https://www.zybuluo.com/mdeditor
