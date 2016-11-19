@@ -12,21 +12,30 @@
 
     
     <meta name="description" content="#BUG修复
-问题产生1、在
-问题查找过程解决办法原因">
+问题产生1、异常代码
+1234File Storage = Environment.getExternalStorageDirectory();File tmepfile = new File(Storage, &quot;/Android/data/包名/***&quot;);if (! tmepfile.exists())	tmepfile.mkdirs();
+2、问题手机
+型号：m3 note
+系">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android写SD卡写文件失败">
 <meta property="og:url" content="https://wang12.github.io/2016/11/18/android-sd-write/index.html">
 <meta property="og:site_name" content="hello,world!">
 <meta property="og:description" content="#BUG修复
-问题产生1、在
-问题查找过程解决办法原因">
-<meta property="og:updated_time" content="2016-11-18T14:25:52.000Z">
+问题产生1、异常代码
+1234File Storage = Environment.getExternalStorageDirectory();File tmepfile = new File(Storage, &quot;/Android/data/包名/***&quot;);if (! tmepfile.exists())	tmepfile.mkdirs();
+2、问题手机
+型号：m3 note
+系">
+<meta property="og:updated_time" content="2016-11-19T03:56:30.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android写SD卡写文件失败">
 <meta name="twitter:description" content="#BUG修复
-问题产生1、在
-问题查找过程解决办法原因">
+问题产生1、异常代码
+1234File Storage = Environment.getExternalStorageDirectory();File tmepfile = new File(Storage, &quot;/Android/data/包名/***&quot;);if (! tmepfile.exists())	tmepfile.mkdirs();
+2、问题手机
+型号：m3 note
+系">
 
     
     <link rel="alternative" href="/atom.xml" title="hello,world!" type="application/atom+xml">
@@ -52,7 +61,7 @@
 			
 			<div id="textlogo">
 				<h1 class="site-name"><a href="/" title="hello,world!">hello,world!</a></h1>
-				<h2 class="blog-motto">不死小强</h2>
+				<h2 class="blog-motto">告诉自己，你还需要更加努力!!</h2>
 			</div>
 			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
 			</a></div>
@@ -107,8 +116,28 @@
 		</div>
 		
 		<p>#BUG修复</p>
-<h2 id="问题产生"><a href="#问题产生" class="headerlink" title="问题产生"></a>问题产生</h2><p>1、在</p>
-<h2 id="问题查找过程"><a href="#问题查找过程" class="headerlink" title="问题查找过程"></a>问题查找过程</h2><h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2>  
+<h2 id="问题产生"><a href="#问题产生" class="headerlink" title="问题产生"></a>问题产生</h2><p>1、异常代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">File Storage = Environment.getExternalStorageDirectory();</div><div class="line">File tmepfile = <span class="keyword">new</span> File(Storage, <span class="string">"/Android/data/包名/***"</span>);</div><div class="line"><span class="keyword">if</span> (! tmepfile.exists())</div><div class="line">	tmepfile.mkdirs();</div></pre></td></tr></table></figure>
+<p>2、问题手机</p>
+<pre><code>型号：m3 note
+系统：Android 5.0
+</code></pre><p>3、问题描述</p>
+<pre><code>上面的创建文件代码，没有任何的异常产生。但是检查结果发现，文件居然没有创建成功。
+而同样的代码在大部分手机上运行都是成功的。所以对于结果不明白为什么。
+</code></pre><h2 id="问题查找过程"><a href="#问题查找过程" class="headerlink" title="问题查找过程"></a>问题查找过程</h2><ol>
+<li>在项目中遇到这个问题，我首先怀疑的是是不是权限问题，但是经过检查发现权限并没有错误</li>
+<li>接着我百度各种错误原因，但是并没有发现什么相关的信息，只是无意间看到别人使用“mnt/sdcard/0”作为根路径创建成功。</li>
+<li>发现SD卡下出现一个0文件夹，然后里面内容和我创建的一致。</li>
+<li>我直接在Activity.getFilesDir()下面创建文件夹成功</li>
+</ol>
+<h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><pre><code>    对于一个项目而言，解决办法是很简单。我如果在判断文件没有创建成功的时候。那么主动在
+“/Android”前面加一个上级目录“/temp”，这样在m3手机上测试是可以用的。
+</code></pre><h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><pre><code>事后，我猜测可能的原因有：
+1. 这个手机是双内存卡的？？
+2. 是否是调试模式导致的？？
+当然我没有详细调研过原因。
+</code></pre><p>如果找到具体的原因，我会补充自己这个BUG记录的</p>
+  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
@@ -130,8 +159,30 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="https://wang12.github.io/2016/11/18/android-sd-write/" data-title="Android写SD卡写文件失败 | hello,world!" data-tsina="null" class="share clearfix">
-	  </div>
+	<div class="share-jiathis">
+	  
+<div class="jiathis_style_24x24">
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_googleplus"></a>
+	<a class="jiathis_button_douban"></a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+    var jiathis_config={
+    data_track_clickback:true,
+    sm:"copy,renren,cqq",
+    pic:"",
+    summary:"",
+    
+  </script> 
+<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=
+" charset="utf-8"></script>      
+
+	 </div>
 	
 	</div>
 
@@ -143,6 +194,14 @@
 	
 <nav class="article-nav clearfix">
  
+ <div class="prev" >
+ <a href="/2016/11/19/textView-chinese-feed/" title="TextView中文标点符号会导致直接换行问题">
+  <strong>上一篇：</strong><br/>
+  <span>
+  TextView中文标点符号会导致直接换行问题</span>
+</a>
+</div>
+
 
 <div class="next">
 <a href="/2016/11/18/mybolg/"  title="博客操作命令">
@@ -176,7 +235,7 @@
 		<ul>
 		
 		  
-			<li><a href="/categories/android/" title="android">android<sup>1</sup></a></li>
+			<li><a href="/categories/android/" title="android">android<sup>6</sup></a></li>
 		  
 		
 		  
@@ -193,7 +252,11 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/bug/" title="bug">bug<sup>1</sup></a></li>
+				<li><a href="/tags/bug/" title="bug">bug<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/function/" title="function">function<sup>2</sup></a></li>
 			
 		
 		</ul>
@@ -227,7 +290,7 @@
 
   <div class="weiboshow">
   <p class="asidetitle">新浪微博</p>
-    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=null&verifier=b3593ceb&dpc=1"></iframe>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=null&verifier=3a89c19b&dpc=1"></iframe>
 </div>
 
 
@@ -351,55 +414,6 @@ $(document).ready(function(){
 });
 </script>
 
-
-<script type="text/javascript">
-$(document).ready(function(){ 
-  var $this = $('.share'),
-      url = $this.attr('data-url'),
-      encodedUrl = encodeURIComponent(url),
-      title = $this.attr('data-title'),
-      tsina = $this.attr('data-tsina'),
-      description = $this.attr('description');
-  var html = [
-  '<div class="hoverqrcode clearfix"></div>',
-  '<a class="overlay" id="qrcode"></a>',
-  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
-  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
-  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
-  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
-  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
-  '<span title="Share to"></span>'
-  ].join('');
-  $this.append(html);
-
-  $('.hoverqrcode').hide();
-
-  var myWidth = 0;
-  function updatehoverqrcode(){
-    if( typeof( window.innerWidth ) == 'number' ) {
-      myWidth = window.innerWidth;
-    } else if( document.documentElement && document.documentElement.clientWidth) {
-      myWidth = document.documentElement.clientWidth;
-    };
-    var qrsize = myWidth > 1024 ? 200:100;
-    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
-    var p = $('.article-share-qrcode').position();
-    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
-                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
-                          .qrcode(options);
-  };
-  $(window).resize(function(){
-    $('.hoverqrcode').hide();
-  });
-  $('.article-share-qrcode').click(function(){
-    updatehoverqrcode();
-    $('.hoverqrcode').toggle();
-  });
-  $('.article-share-qrcode').hover(function(){}, function(){
-      $('.hoverqrcode').hide();
-  });
-});   
-</script>
 
 
 
