@@ -1,5 +1,4 @@
 ---
-layout: photo
 title: seekBar镂空,透明效果
 date: 2016-11-19 16:29:48
 tags: function
@@ -10,7 +9,7 @@ categories: android
 
 设计要求seekBar样式具体如下图所示：
 
-![按钮中间透明](seek-bar-镂空效果/seek_bar_hollow_out.png)
+![按钮中间透明](/images/seek_bar_hollow_out.png)
 
 	以前我也自定义过seekBar。但是这种透明效果的还是第一次看到。
 
