@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="baidu-site-verification" content="g6aOnZn9cI" />
   
-    <title>Home键应用重启问题 | hello,world!</title>
+    <title>Android混淆打包日志过滤失败 | hello,world!</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="小强">
@@ -14,44 +14,29 @@
     
     <meta name="description" content="BUG修复问题产生
 问题描述
- 项目开发测试过程中，发现在一个二级界面中，按下HOME键，然后再通过点击应用图标进入。发现应用又到了一级界面。
+ APP要上线了，但是在测试时，打印了很多关于安全性的日志，而且使用了很多其他的SDK，这些SDK中也有一部分日志。 所以想到了在混淆时，直接删除所有的日志信息。
 
-问题手机
- 所有手机都会出现
-
-
-问题查找过程这个问题不是我所遇到的，但是是我查找另一个关于应用多次启动问题时发现的这个。以前自己也没有做
-过这方面的研究，但是看到这个问题后觉得很基础，所以在这里记一下。百度上有很多关于这个问题的描述，
-直接输入“And">
+混淆代码 我使用的混淆代码如下：
+ 12345678910111213141516171819202122232425	-optimizationpasses 5-dontusemixedcaseclas">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Home键应用重启问题">
-<meta property="og:url" content="https://wang12.github.io/2016/11/19/home-activity/index.html">
+<meta property="og:title" content="Android混淆打包日志过滤失败">
+<meta property="og:url" content="https://wang12.github.io/2016/11/24/Android混淆打包日志过滤失败/index.html">
 <meta property="og:site_name" content="hello,world!">
 <meta property="og:description" content="BUG修复问题产生
 问题描述
- 项目开发测试过程中，发现在一个二级界面中，按下HOME键，然后再通过点击应用图标进入。发现应用又到了一级界面。
+ APP要上线了，但是在测试时，打印了很多关于安全性的日志，而且使用了很多其他的SDK，这些SDK中也有一部分日志。 所以想到了在混淆时，直接删除所有的日志信息。
 
-问题手机
- 所有手机都会出现
-
-
-问题查找过程这个问题不是我所遇到的，但是是我查找另一个关于应用多次启动问题时发现的这个。以前自己也没有做
-过这方面的研究，但是看到这个问题后觉得很基础，所以在这里记一下。百度上有很多关于这个问题的描述，
-直接输入“And">
-<meta property="og:updated_time" content="2016-11-19T04:52:34.000Z">
+混淆代码 我使用的混淆代码如下：
+ 12345678910111213141516171819202122232425	-optimizationpasses 5-dontusemixedcaseclas">
+<meta property="og:updated_time" content="2016-11-24T12:37:32.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Home键应用重启问题">
+<meta name="twitter:title" content="Android混淆打包日志过滤失败">
 <meta name="twitter:description" content="BUG修复问题产生
 问题描述
- 项目开发测试过程中，发现在一个二级界面中，按下HOME键，然后再通过点击应用图标进入。发现应用又到了一级界面。
+ APP要上线了，但是在测试时，打印了很多关于安全性的日志，而且使用了很多其他的SDK，这些SDK中也有一部分日志。 所以想到了在混淆时，直接删除所有的日志信息。
 
-问题手机
- 所有手机都会出现
-
-
-问题查找过程这个问题不是我所遇到的，但是是我查找另一个关于应用多次启动问题时发现的这个。以前自己也没有做
-过这方面的研究，但是看到这个问题后觉得很基础，所以在这里记一下。百度上有很多关于这个问题的描述，
-直接输入“And">
+混淆代码 我使用的混淆代码如下：
+ 12345678910111213141516171819202122232425	-optimizationpasses 5-dontusemixedcaseclas">
 
     
     <link rel="alternative" href="/atom.xml" title="hello,world!" type="application/atom+xml">
@@ -113,14 +98,14 @@
   <meta name="baidu-site-verification" content="g6aOnZn9cI" />
   <h1 itemprop="name">
     
-      <a href="/2016/11/19/home-activity/" title="Home键应用重启问题" itemprop="url">Home键应用重启问题</a>
+      <a href="/2016/11/24/Android混淆打包日志过滤失败/" title="Android混淆打包日志过滤失败" itemprop="url">Android混淆打包日志过滤失败</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="小强" target="_blank" itemprop="author">小强</a>
 		
   <p class="article-time">
-    <time datetime="2016-11-19T04:21:42.000Z" itemprop="datePublished"> 发表于 2016-11-19</time>
+    <time datetime="2016-11-24T09:38:57.000Z" itemprop="datePublished"> 发表于 2016-11-24</time>
 
   </p>
 </header>
@@ -136,23 +121,22 @@
 		
 		<h1 id="BUG修复"><a href="#BUG修复" class="headerlink" title="BUG修复"></a>BUG修复</h1><h2 id="问题产生"><a href="#问题产生" class="headerlink" title="问题产生"></a>问题产生</h2><ol>
 <li><p>问题描述</p>
-<p> 项目开发测试过程中，发现在一个二级界面中，按下HOME键，然后再通过点击应用图标进入。发现应用又到了一级界面。</p>
+<p> APP要上线了，但是在测试时，打印了很多关于安全性的日志，而且使用了很多其他的SDK，这些SDK中也有一部分日志。<br> 所以想到了在混淆时，直接删除所有的日志信息。</p>
 </li>
-<li><p>问题手机</p>
-<p> 所有手机都会出现</p>
+<li><p>混淆代码<br> 我使用的混淆代码如下：</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">	-optimizationpasses <span class="number">5</span></div><div class="line">-dontusemixedcaseclassnames</div><div class="line">-dontskipnonpubliclibraryclasses</div><div class="line">-verbose</div><div class="line">-ignorewarnings</div><div class="line">-optimizations !code/simplification/arithmetic,!field<span class="comment">/*,!class/merging/*</span></div><div class="line">-keepattributes Signature</div><div class="line">-keep public class * extends android.app.Activity</div><div class="line">-keep public class * extends android.app.Application</div><div class="line">-keep public class * extends android.app.Service</div><div class="line">-keep public class * extends android.content.BroadcastReceiver</div><div class="line">-keep public class * extends android.content.ContentProvider</div><div class="line">-keep public class com.android.vending.licensing.ILicensingService</div><div class="line">-keep class android.support.** &#123;*;&#125;</div><div class="line">-keep public class * extends android.view.View</div><div class="line">-keep class **.R$* &#123;</div><div class="line"> *;</div><div class="line">&#125;</div><div class="line">-assumenosideeffects class android.util.Log&#123;</div><div class="line">    public static *** d(...);</div><div class="line">    public static *** v(...);</div><div class="line">    public static *** i(...);</div><div class="line">    public static *** w(...);</div><div class="line">    public static *** e(...);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ol>
-<h2 id="问题查找过程"><a href="#问题查找过程" class="headerlink" title="问题查找过程"></a>问题查找过程</h2><pre><code>这个问题不是我所遇到的，但是是我查找另一个关于应用多次启动问题时发现的这个。以前自己也没有做
-过这方面的研究，但是看到这个问题后觉得很基础，所以在这里记一下。百度上有很多关于这个问题的描述，
-直接输入“Android android:launchMode=&quot;singleTask&quot;”可以找到很多答案。
-</code></pre><h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><pre><code>删除manifest文件中主Activity配置的android:launchMode=&quot;singleTask&quot;模式。
-</code></pre><h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><pre><code>这个问题主要和singleTask模式有关
-1、standard系统默认启动模式。当你多次调用startActivity时会启动多个Activity
-2、singleTop。如果你要启动的Activity在当前应用栈的栈顶，那么就不会重复启动。如果不在栈顶，那么就会重新启动一个。
-3、singleTask。如果你要启动的Activity在当前应用栈的栈顶，那么不会重复启动。如果不在栈顶，那么就关掉到栈顶的所有其他启动的Activity.
-4、singleInstance。新的Activity在一个单独的栈中
-</code></pre><p>正因为这种特殊性，如果主Activity设置singleTask，那么你每次点击图标，其他的Activity都会被关掉，相当于应用重启，这个问题和Activity被启动多次不同，启动多次的问题可以看我的另一篇博客。</p>
-  
+<p>3、开发环境</p>
+<pre><code>Android stdio
+</code></pre><h2 id="问题查找过程"><a href="#问题查找过程" class="headerlink" title="问题查找过程"></a>问题查找过程</h2><pre><code>1. 通过上面的代码，我在AS下打出正式包。但是日志还是继续在控制台下打印。通过对APK的反编译，我发现我的APK确实是混淆了的
+2. 在百度各种寻找，发现混淆代码就这么一种写法。对于网上说的混淆失败是使用-dontoptimize参数的问题。我这边并没有使用
+3. 无意间通过Eclipse测试打包，发现打包出来的日志确实没有在打印，所以觉得这个是AS打包的问题。
+</code></pre><h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><pre><code>由于我的APK使用了其他的SDK，而那些SDK通过AS下载了很多其他的包。并不能在Eclispe上直接运行，需要进行大量的修改。
+所以只能考虑通过参数控制日志的输出。对于其他SDK中的日志就无能为力了。
+所以我新建Log类，通过全部项目中&quot;android.util.Log&quot;字符串的方式解决自己日志输出的问题。
+</code></pre><h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><pre><code>在各大网站上搜索，并没有找到这个问题的原因。
+</code></pre>  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
@@ -209,19 +193,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2016/11/19/home-activity-starts/" title="第一次安装应用，Home键应用多次启动问题">
-  <strong>上一篇：</strong><br/>
-  <span>
-  第一次安装应用，Home键应用多次启动问题</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2016/11/19/textView-chinese-feed/"  title="TextView中文标点符号会导致直接换行问题">
+<a href="/2016/11/19/seek-bar-镂空效果/"  title="seekBar镂空,透明效果">
  <strong>下一篇：</strong><br/> 
- <span>TextView中文标点符号会导致直接换行问题
+ <span>seekBar镂空,透明效果
 </span>
 </a>
 </div>
