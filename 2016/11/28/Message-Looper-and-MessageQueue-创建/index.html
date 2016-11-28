@@ -1,0 +1,521 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="baidu-site-verification" content="g6aOnZn9cI" />
+  
+    <title>Message Looper and MessageQueue 创建 | hello,world!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="小强">
+    
+
+    
+    <meta name="description" content="Message Looper MessageQueueMessage描述Message 是Handler数据的一个封装。
+Message 对象可以通过new,Message.obtain()或者Handler.obtainMessage()获取。
+创建
+直接new一个Message,此时不包含任何的参数。
+通过Message.obtain系列方法获取一个。
+ 123456789Message.ob">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Message Looper and MessageQueue 创建">
+<meta property="og:url" content="https://wang12.github.io/2016/11/28/Message-Looper-and-MessageQueue-创建/index.html">
+<meta property="og:site_name" content="hello,world!">
+<meta property="og:description" content="Message Looper MessageQueueMessage描述Message 是Handler数据的一个封装。
+Message 对象可以通过new,Message.obtain()或者Handler.obtainMessage()获取。
+创建
+直接new一个Message,此时不包含任何的参数。
+通过Message.obtain系列方法获取一个。
+ 123456789Message.ob">
+<meta property="og:updated_time" content="2016-11-28T13:36:32.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Message Looper and MessageQueue 创建">
+<meta name="twitter:description" content="Message Looper MessageQueueMessage描述Message 是Handler数据的一个封装。
+Message 对象可以通过new,Message.obtain()或者Handler.obtainMessage()获取。
+创建
+直接new一个Message,此时不包含任何的参数。
+通过Message.obtain系列方法获取一个。
+ 123456789Message.ob">
+
+    
+    <link rel="alternative" href="/atom.xml" title="hello,world!" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/logo.png">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <meta name="baidu-site-verification" content="g6aOnZn9cI" />
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="hello,world!" title="hello,world!"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="hello,world!">hello,world!</a></h1>
+				<h2 class="blog-motto">告诉自己，你还需要更加努力!!</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+						<form class="search" action="https://www.baidu.com/" target="_blank">
+							<label>Search</label>
+						<input name="s" type="hidden" value= null ><input type="text" name="q" size="30" placeholder="搜索"><br>
+						</form>
+					
+					</li>
+				</ul>
+			</nav>
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <meta name="baidu-site-verification" content="g6aOnZn9cI" />
+  <h1 itemprop="name">
+    
+      <a href="/2016/11/28/Message-Looper-and-MessageQueue-创建/" title="Message Looper and MessageQueue 创建" itemprop="url">Message Looper and MessageQueue 创建</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="小强" target="_blank" itemprop="author">小强</a>
+		
+  <p class="article-time">
+    <time datetime="2016-11-28T09:57:44.000Z" itemprop="datePublished"> 发表于 2016-11-28</time>
+
+  </p>
+</header>
+
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Message-Looper-MessageQueue"><span class="toc-number">1.</span> <span class="toc-text">Message Looper MessageQueue</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Message"><span class="toc-number">1.1.</span> <span class="toc-text">Message</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#描述"><span class="toc-number">1.1.1.</span> <span class="toc-text">描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建"><span class="toc-number">1.1.2.</span> <span class="toc-text">创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#我的问题"><span class="toc-number">1.1.3.</span> <span class="toc-text">我的问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Looper"><span class="toc-number">1.2.</span> <span class="toc-text">Looper</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#描述-1"><span class="toc-number">1.2.1.</span> <span class="toc-text">描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建-1"><span class="toc-number">1.2.2.</span> <span class="toc-text">创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#我的问题-1"><span class="toc-number">1.2.3.</span> <span class="toc-text">我的问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MessageQueue"><span class="toc-number">1.3.</span> <span class="toc-text">MessageQueue</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#描述-2"><span class="toc-number">1.3.1.</span> <span class="toc-text">描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建-2"><span class="toc-number">1.3.2.</span> <span class="toc-text">创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#我的问题-2"><span class="toc-number">1.3.3.</span> <span class="toc-text">我的问题</span></a></li></ol></li></ol></li></ol>
+		
+		</div>
+		
+		<h1 id="Message-Looper-MessageQueue"><a href="#Message-Looper-MessageQueue" class="headerlink" title="Message Looper MessageQueue"></a>Message Looper MessageQueue</h1><h2 id="Message"><a href="#Message" class="headerlink" title="Message"></a>Message</h2><h3 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h3><pre><code>Message 是Handler数据的一个封装。
+Message 对象可以通过new,Message.obtain()或者Handler.obtainMessage()获取。
+</code></pre><h3 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h3><ol>
+<li>直接new一个Message,此时不包含任何的参数。</li>
+<li><p>通过Message.obtain系列方法获取一个。</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Message.obtain();</div><div class="line">Message.obtain(Message orig);</div><div class="line">Message.obtain(Handler h);</div><div class="line">Message.obtain(Handler h, Runnable callback);</div><div class="line">Message.obtain(Handler h, <span class="keyword">int</span> what);</div><div class="line">Message.obtain(Handler h, <span class="keyword">int</span> what, Object obj);</div><div class="line">Message.obtain(Handler h, <span class="keyword">int</span> what, <span class="keyword">int</span> arg1, <span class="keyword">int</span> arg2);</div><div class="line">Message.obtain(Handler h, <span class="keyword">int</span> what, </div><div class="line">            <span class="keyword">int</span> arg1, <span class="keyword">int</span> arg2, Object obj);</div></pre></td></tr></table></figure>
+</li>
+<li><p>通过Handler.obtainMessage 系列方法获取一个</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Handler.obtainMessage();</div><div class="line">Handler.obtainMessage(<span class="keyword">int</span> what);</div><div class="line">Handler.obtainMessage(<span class="keyword">int</span> what, Object obj);</div><div class="line">Handler.obtainMessage(<span class="keyword">int</span> what, <span class="keyword">int</span> arg1, <span class="keyword">int</span> arg2);</div><div class="line">Handler.obtainMessage(<span class="keyword">int</span> what, <span class="keyword">int</span> arg1, <span class="keyword">int</span> arg2, Object obj);</div></pre></td></tr></table></figure>
+<hr>
+<pre><code>1. 通过Handler创建Message方法时，其实还是调用到对应的Message.obtain方法中。
+2. 所有的方法都会执行Message.obtain。主要作用是进行Message的回收利用。所以比单独的new一个Message效率好
+</code></pre><hr>
+</li>
+</ol>
+<h3 id="我的问题"><a href="#我的问题" class="headerlink" title="我的问题"></a>我的问题</h3><ol>
+<li><p>Message对象是如何实现回收利用的?</p>
+<p> 有五个对象需要关注：sPoolSync,sPool,m.next,sPoolSize,MAX_POOL_SIZE:</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="number">1</span>). sPoolSync只是一个简单的Object对象，<span class="keyword">static</span> <span class="keyword">final</span> 描述，全局看都是通过<span class="keyword">synchronized</span>去实现同步。</div><div class="line"><span class="number">2</span>). 在回收时，next指向当前sPool，sPool指向当前Message。看来这两个参数是相当于列表的指针</div><div class="line"><span class="number">3</span>). 判断sPoolSize小于MAX_POOL_SIZE。这个应该是最大保留的Message对象，最大<span class="number">50</span>个。</div><div class="line"><span class="number">4</span>). 每次使用时，当前Message中都有两个对象，一个指向上一次使用的Message.一个指向当前的可用的Message。</div><div class="line">当每次取一个之后，就会把队列中当前的Message向前移动一格。如果使用不频繁，那么每次都会使用一个。</div><div class="line">当频繁使用的时候就会使用好多个，最后使用完成又增加好多个Message，这样完成重用的机制。</div></pre></td></tr></table></figure>
+<p> 这里有一个容易出问题，就是你不能直接调用Message的recycle方法。因为Looper.loop()方法中已经主动调用了这个。</p>
+<p> 感谢下面大神的博客，不然我也一直想不通为啥我从来没有调用过recycle，还怀疑是自己使用错了呢。</p>
+<p> <a href="http://dourok.info/2014/07/15/quick-overview-of-recycling-pattern-in-android/" target="_blank" rel="external">浅谈 Recycle 机制</a></p>
+<p> <font color="red">仿照Message实现对象的重用是一个很好的例子，但是要注意形成死循环。</font>读读源码真好，这个原理知道，但是以前想不到这个办法，以前能想到的创建一个队列去处理！！！</p>
+</li>
+<li>在Message中为什么要保留Handler对象?</li>
+</ol>
+<h2 id="Looper"><a href="#Looper" class="headerlink" title="Looper"></a>Looper</h2><h3 id="描述-1"><a href="#描述-1" class="headerlink" title="描述"></a>描述</h3><h3 id="创建-1"><a href="#创建-1" class="headerlink" title="创建"></a>创建</h3><h3 id="我的问题-1"><a href="#我的问题-1" class="headerlink" title="我的问题"></a>我的问题</h3><h2 id="MessageQueue"><a href="#MessageQueue" class="headerlink" title="MessageQueue"></a>MessageQueue</h2><h3 id="描述-2"><a href="#描述-2" class="headerlink" title="描述"></a>描述</h3><h3 id="创建-2"><a href="#创建-2" class="headerlink" title="创建"></a>创建</h3><h3 id="我的问题-2"><a href="#我的问题-2" class="headerlink" title="我的问题"></a>我的问题</h3>  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/android/">android</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/source/">source</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	<div class="share-jiathis">
+	  
+<div class="jiathis_style_24x24">
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_googleplus"></a>
+	<a class="jiathis_button_douban"></a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+    var jiathis_config={
+    data_track_clickback:true,
+    sm:"copy,renren,cqq",
+    pic:"",
+    summary:"",
+    
+  </script> 
+<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=
+" charset="utf-8"></script>      
+
+	 </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2016/11/28/handler初始化/"  title="handler初始化">
+ <strong>下一篇：</strong><br/> 
+ <span>handler初始化
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Message-Looper-MessageQueue"><span class="toc-number">1.</span> <span class="toc-text">Message Looper MessageQueue</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Message"><span class="toc-number">1.1.</span> <span class="toc-text">Message</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#描述"><span class="toc-number">1.1.1.</span> <span class="toc-text">描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建"><span class="toc-number">1.1.2.</span> <span class="toc-text">创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#我的问题"><span class="toc-number">1.1.3.</span> <span class="toc-text">我的问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Looper"><span class="toc-number">1.2.</span> <span class="toc-text">Looper</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#描述-1"><span class="toc-number">1.2.1.</span> <span class="toc-text">描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建-1"><span class="toc-number">1.2.2.</span> <span class="toc-text">创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#我的问题-1"><span class="toc-number">1.2.3.</span> <span class="toc-text">我的问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MessageQueue"><span class="toc-number">1.3.</span> <span class="toc-text">MessageQueue</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#描述-2"><span class="toc-number">1.3.1.</span> <span class="toc-text">描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建-2"><span class="toc-number">1.3.2.</span> <span class="toc-text">创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#我的问题-2"><span class="toc-number">1.3.3.</span> <span class="toc-text">我的问题</span></a></li></ol></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/android/" title="android">android<sup>9</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/other/" title="other">other<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/bug/" title="bug">bug<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/source/" title="source">source<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/function/" title="function">function<sup>2</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://blog.csdn.net/" target="_blank" title="CSDN社区">CSDN 社区</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://developer.android.com/index.html" target="_blank" title="android developer">android developer</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://developers.google.com/vr/" target="_blank" title="google vr">google vr</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=null&verifier=3a89c19b&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p>  IT小强,希望每天都开心 <br/>
+			写给自己的博客</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/3535012745" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/827498077@qq.com" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:827498077@qq.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+	 	 博客创建日期 @ 2016.11.05 19:00
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?26cff7ff569b956a445199e85c2a0e30";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
+
