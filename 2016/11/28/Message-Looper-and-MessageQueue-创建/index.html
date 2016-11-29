@@ -5,53 +5,38 @@
   <meta charset="UTF-8">
   <meta name="baidu-site-verification" content="g6aOnZn9cI" />
   
-    <title>第一次安装应用，Home键应用多次启动问题 | hello,world!</title>
+    <title>Message创建 | hello,world!</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="小强">
     
 
     
-    <meta name="description" content="BUG修复问题产生
-问题描述
- 第一次安装应用后，直接点击打开按钮，打开APP。然后进入APP的二级界面，按下HOME键。接下来通过点击图标打开APP。你会惊奇的发现，APP居然在一级界面上。
- （在我的APP中，接下来的操作出现各种奇葩的错误）
-
-问题手机
- 所有手机都会有
-
-
-问题查找过程
-这个问题被提出过好多次，开始我一直以为是某一个界面出现的问题，所以一直在解决Activity模式的原因。">
+    <meta name="description" content="Message描述Message 是Handler数据的一个封装。
+Message 对象可以通过new,Message.obtain()或者Handler.obtainMessage()获取。
+创建
+直接new一个Message,此时不包含任何的参数。
+通过Message.obtain系列方法获取一个。
+ 123456789Message.obtain();Message.obtain(Messa">
 <meta property="og:type" content="article">
-<meta property="og:title" content="第一次安装应用，Home键应用多次启动问题">
-<meta property="og:url" content="https://wang12.github.io/2016/11/19/home-activity-starts/index.html">
+<meta property="og:title" content="Message创建">
+<meta property="og:url" content="https://wang12.github.io/2016/11/28/Message-Looper-and-MessageQueue-创建/index.html">
 <meta property="og:site_name" content="hello,world!">
-<meta property="og:description" content="BUG修复问题产生
-问题描述
- 第一次安装应用后，直接点击打开按钮，打开APP。然后进入APP的二级界面，按下HOME键。接下来通过点击图标打开APP。你会惊奇的发现，APP居然在一级界面上。
- （在我的APP中，接下来的操作出现各种奇葩的错误）
-
-问题手机
- 所有手机都会有
-
-
-问题查找过程
-这个问题被提出过好多次，开始我一直以为是某一个界面出现的问题，所以一直在解决Activity模式的原因。">
-<meta property="og:updated_time" content="2016-11-19T05:27:40.000Z">
+<meta property="og:description" content="Message描述Message 是Handler数据的一个封装。
+Message 对象可以通过new,Message.obtain()或者Handler.obtainMessage()获取。
+创建
+直接new一个Message,此时不包含任何的参数。
+通过Message.obtain系列方法获取一个。
+ 123456789Message.obtain();Message.obtain(Messa">
+<meta property="og:updated_time" content="2016-11-29T07:29:41.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="第一次安装应用，Home键应用多次启动问题">
-<meta name="twitter:description" content="BUG修复问题产生
-问题描述
- 第一次安装应用后，直接点击打开按钮，打开APP。然后进入APP的二级界面，按下HOME键。接下来通过点击图标打开APP。你会惊奇的发现，APP居然在一级界面上。
- （在我的APP中，接下来的操作出现各种奇葩的错误）
-
-问题手机
- 所有手机都会有
-
-
-问题查找过程
-这个问题被提出过好多次，开始我一直以为是某一个界面出现的问题，所以一直在解决Activity模式的原因。">
+<meta name="twitter:title" content="Message创建">
+<meta name="twitter:description" content="Message描述Message 是Handler数据的一个封装。
+Message 对象可以通过new,Message.obtain()或者Handler.obtainMessage()获取。
+创建
+直接new一个Message,此时不包含任何的参数。
+通过Message.obtain系列方法获取一个。
+ 123456789Message.obtain();Message.obtain(Messa">
 
     
     <link rel="alternative" href="/atom.xml" title="hello,world!" type="application/atom+xml">
@@ -113,14 +98,14 @@
   <meta name="baidu-site-verification" content="g6aOnZn9cI" />
   <h1 itemprop="name">
     
-      <a href="/2016/11/19/home-activity-starts/" title="第一次安装应用，Home键应用多次启动问题" itemprop="url">第一次安装应用，Home键应用多次启动问题</a>
+      <a href="/2016/11/28/Message-Looper-and-MessageQueue-创建/" title="Message创建" itemprop="url">Message创建</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="小强" target="_blank" itemprop="author">小强</a>
 		
   <p class="article-time">
-    <time datetime="2016-11-19T04:53:42.000Z" itemprop="datePublished"> 发表于 2016-11-19</time>
+    <time datetime="2016-11-28T09:57:44.000Z" itemprop="datePublished"> 发表于 2016-11-28</time>
 
   </p>
 </header>
@@ -130,36 +115,40 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#BUG修复"><span class="toc-number">1.</span> <span class="toc-text">BUG修复</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#问题产生"><span class="toc-number">1.1.</span> <span class="toc-text">问题产生</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#问题查找过程"><span class="toc-number">1.2.</span> <span class="toc-text">问题查找过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决办法"><span class="toc-number">1.3.</span> <span class="toc-text">解决办法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#原因"><span class="toc-number">1.4.</span> <span class="toc-text">原因</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Message"><span class="toc-number">1.</span> <span class="toc-text">Message</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#描述"><span class="toc-number">1.1.</span> <span class="toc-text">描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建"><span class="toc-number">1.2.</span> <span class="toc-text">创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#我的问题"><span class="toc-number">1.3.</span> <span class="toc-text">我的问题</span></a></li></ol></li></ol>
 		
 		</div>
 		
-		<h1 id="BUG修复"><a href="#BUG修复" class="headerlink" title="BUG修复"></a>BUG修复</h1><h2 id="问题产生"><a href="#问题产生" class="headerlink" title="问题产生"></a>问题产生</h2><ol>
-<li><p>问题描述</p>
-<p> 第一次安装应用后，直接点击打开按钮，打开APP。然后进入APP的二级界面，按下HOME键。接下来通过点击图标打开APP。你会惊奇的发现，APP居然在一级界面上。</p>
-<p> （在我的APP中，接下来的操作出现各种奇葩的错误）</p>
+		<h2 id="Message"><a href="#Message" class="headerlink" title="Message"></a>Message</h2><h3 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h3><pre><code>Message 是Handler数据的一个封装。
+Message 对象可以通过new,Message.obtain()或者Handler.obtainMessage()获取。
+</code></pre><h3 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h3><ol>
+<li>直接new一个Message,此时不包含任何的参数。</li>
+<li><p>通过Message.obtain系列方法获取一个。</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Message.obtain();</div><div class="line">Message.obtain(Message orig);</div><div class="line">Message.obtain(Handler h);</div><div class="line">Message.obtain(Handler h, Runnable callback);</div><div class="line">Message.obtain(Handler h, <span class="keyword">int</span> what);</div><div class="line">Message.obtain(Handler h, <span class="keyword">int</span> what, Object obj);</div><div class="line">Message.obtain(Handler h, <span class="keyword">int</span> what, <span class="keyword">int</span> arg1, <span class="keyword">int</span> arg2);</div><div class="line">Message.obtain(Handler h, <span class="keyword">int</span> what, </div><div class="line">            <span class="keyword">int</span> arg1, <span class="keyword">int</span> arg2, Object obj);</div></pre></td></tr></table></figure>
 </li>
-<li><p>问题手机</p>
-<p> 所有手机都会有</p>
+<li><p>通过Handler.obtainMessage 系列方法获取一个</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Handler.obtainMessage();</div><div class="line">Handler.obtainMessage(<span class="keyword">int</span> what);</div><div class="line">Handler.obtainMessage(<span class="keyword">int</span> what, Object obj);</div><div class="line">Handler.obtainMessage(<span class="keyword">int</span> what, <span class="keyword">int</span> arg1, <span class="keyword">int</span> arg2);</div><div class="line">Handler.obtainMessage(<span class="keyword">int</span> what, <span class="keyword">int</span> arg1, <span class="keyword">int</span> arg2, Object obj);</div></pre></td></tr></table></figure>
+<hr>
+<pre><code>1. 通过Handler创建Message方法时，其实还是调用到对应的Message.obtain方法中。
+2. 所有的方法都会执行Message.obtain。主要作用是进行Message的回收利用。所以比单独的new一个Message效率好
+</code></pre><hr>
 </li>
 </ol>
-<h2 id="问题查找过程"><a href="#问题查找过程" class="headerlink" title="问题查找过程"></a>问题查找过程</h2><ol>
-<li>这个问题被提出过好多次，开始我一直以为是某一个界面出现的问题，所以一直在解决Activity模式的原因。</li>
-<li>后来，这个问题被测试妹子准确定位。重现步骤也已经明确，所以才明确问题是什么。</li>
-<li>通过下载其他的APP，发现有的也有这个问题，有的APP没有，觉得这个应该能解决。</li>
-<li>百度</li>
+<h3 id="我的问题"><a href="#我的问题" class="headerlink" title="我的问题"></a>我的问题</h3><ol>
+<li><p>Message对象是如何实现回收利用的?</p>
+<p> 有五个对象需要关注：sPoolSync,sPool,m.next,sPoolSize,MAX_POOL_SIZE:</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="number">1</span>). sPoolSync只是一个简单的Object对象，<span class="keyword">static</span> <span class="keyword">final</span> 描述，全局看都是通过<span class="keyword">synchronized</span>去实现同步。</div><div class="line"><span class="number">2</span>). 在回收时，next指向当前sPool，sPool指向当前Message。看来这两个参数是相当于列表的指针</div><div class="line"><span class="number">3</span>). 判断sPoolSize小于MAX_POOL_SIZE。这个应该是最大保留的Message对象，最大<span class="number">50</span>个。</div><div class="line"><span class="number">4</span>). 每次使用时，当前Message中都有两个对象，一个指向上一次使用的Message.一个指向当前的可用的Message。</div><div class="line">当每次取一个之后，就会把队列中当前的Message向前移动一格。如果使用不频繁，那么每次都会使用一个。</div><div class="line">当频繁使用的时候就会使用好多个，最后使用完成又增加好多个Message，这样完成重用的机制。</div></pre></td></tr></table></figure>
+<p> 这里有一个容易出问题，就是你不能直接调用Message的recycle方法。因为Looper.loop()方法中已经主动调用了这个。</p>
+<p> 感谢下面大神的博客，不然我也一直想不通为啥我从来没有调用过recycle，还怀疑是自己使用错了呢。</p>
+<p> <a href="http://dourok.info/2014/07/15/quick-overview-of-recycling-pattern-in-android/" target="_blank" rel="external">浅谈 Recycle 机制</a></p>
+<p> <font color="red">仿照Message实现对象的重用是一个很好的例子，但是要注意形成死循环。</font>读读源码真好，这个原理知道，但是以前想不到这个办法，以前能想到的创建一个队列去处理！！！</p>
+</li>
+<li><p>在Message中为什么要保留Handler对象?</p>
+<p> 如果只是单纯的通过Message类去看Handler对象的使用。那么在Message中保留Handler对象的第一个作用就是：</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//target 就是Handler对象</span></div><div class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sendToTarget</span><span class="params">()</span> </span>&#123;</div><div class="line">       target.sendMessage(<span class="keyword">this</span>);</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<p> 第二个作用：(最主要作用)<br> 在Looper的loop循环中，会根据每个Message的Handler发送消息给自己的Handler。</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">        msg.target.dispatchMessage(msg);</div><div class="line">&#125; <span class="keyword">finally</span> &#123;</div><div class="line">        <span class="keyword">if</span> (traceTag != <span class="number">0</span>) &#123;</div><div class="line">             Trace.traceEnd(traceTag);</div><div class="line">        &#125;</div><div class="line">  &#125;</div></pre></td></tr></table></figure></li>
 </ol>
-<h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><pre><code>在主Activity中添加如下代码：
-if((getIntent().getFlags() &amp; Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) != 0){
-        finish();
-        return;
-}
-</code></pre><h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><pre><code>通过查找，很多大神都说是：
-1、安装器打开应用flag为FLAG_ACTIVITY_NEW_TASK，launcher打开应用比系统安装器多了FLAG_ACTIVITY_RESET_TASK_IF_NEEDED。
-2、因为系统启动模式是standard：打开多次MainActivity会在原有任务栈中叠加出现多个。
-</code></pre><p>这个问题理论应该很常见，但估计也是很多Android开发忽略掉的问题，这里我一定要注意这个问题。</p>
-<p>###最后，感谢大神博客：</p>
-<p><a href="http://blog.csdn.net/zhangcanyan/article/details/52777265" target="_blank" rel="external">http://blog.csdn.net/zhangcanyan/article/details/52777265</a></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -173,7 +162,7 @@ if((getIntent().getFlags() &amp; Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) != 0){
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/bug/">bug</a>
+  <span></span> <a href="/tags/source/">source</a>
   </div>
 
 </div>
@@ -218,18 +207,18 @@ if((getIntent().getFlags() &amp; Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) != 0){
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2016/11/19/android-获取被禁用的应用/" title="获取被禁用的应用">
+ <a href="/2016/11/29/Message-Looper-and-MessageQueue-创建2/" title="Looper and MessageQueue创建">
   <strong>上一篇：</strong><br/>
   <span>
-  获取被禁用的应用</span>
+  Looper and MessageQueue创建</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2016/11/19/home-activity/"  title="Home键应用重启问题">
+<a href="/2016/11/28/handler初始化/"  title="handler初始化">
  <strong>下一篇：</strong><br/> 
- <span>Home键应用重启问题
+ <span>handler初始化
 </span>
 </a>
 </div>
@@ -244,7 +233,7 @@ if((getIntent().getFlags() &amp; Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) != 0){
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#BUG修复"><span class="toc-number">1.</span> <span class="toc-text">BUG修复</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#问题产生"><span class="toc-number">1.1.</span> <span class="toc-text">问题产生</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#问题查找过程"><span class="toc-number">1.2.</span> <span class="toc-text">问题查找过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决办法"><span class="toc-number">1.3.</span> <span class="toc-text">解决办法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#原因"><span class="toc-number">1.4.</span> <span class="toc-text">原因</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Message"><span class="toc-number">1.</span> <span class="toc-text">Message</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#描述"><span class="toc-number">1.1.</span> <span class="toc-text">描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建"><span class="toc-number">1.2.</span> <span class="toc-text">创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#我的问题"><span class="toc-number">1.3.</span> <span class="toc-text">我的问题</span></a></li></ol></li></ol>
  
   </div>
 

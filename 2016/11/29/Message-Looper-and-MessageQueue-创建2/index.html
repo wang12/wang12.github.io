@@ -1,0 +1,514 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="baidu-site-verification" content="g6aOnZn9cI" />
+  
+    <title>Looper and MessageQueue创建 | hello,world!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="小强">
+    
+
+    
+    <meta name="description" content="Looper and MessageQueueLooper描述Looper主要是在线程中开启一个循环队列。
+就像Android API文档中描述的那样。调用prepare()创建，调用loop开始循环。
+创建1231. Looper.prepare(); 2. Looper.prepareMainLooper(); // API 文档中说了，这个方法是系统调用的。我们永远不能调用这个方法。
+1.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Looper and MessageQueue创建">
+<meta property="og:url" content="https://wang12.github.io/2016/11/29/Message-Looper-and-MessageQueue-创建2/index.html">
+<meta property="og:site_name" content="hello,world!">
+<meta property="og:description" content="Looper and MessageQueueLooper描述Looper主要是在线程中开启一个循环队列。
+就像Android API文档中描述的那样。调用prepare()创建，调用loop开始循环。
+创建1231. Looper.prepare(); 2. Looper.prepareMainLooper(); // API 文档中说了，这个方法是系统调用的。我们永远不能调用这个方法。
+1.">
+<meta property="og:updated_time" content="2016-11-29T07:34:14.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Looper and MessageQueue创建">
+<meta name="twitter:description" content="Looper and MessageQueueLooper描述Looper主要是在线程中开启一个循环队列。
+就像Android API文档中描述的那样。调用prepare()创建，调用loop开始循环。
+创建1231. Looper.prepare(); 2. Looper.prepareMainLooper(); // API 文档中说了，这个方法是系统调用的。我们永远不能调用这个方法。
+1.">
+
+    
+    <link rel="alternative" href="/atom.xml" title="hello,world!" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/logo.png">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <meta name="baidu-site-verification" content="g6aOnZn9cI" />
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="hello,world!" title="hello,world!"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="hello,world!">hello,world!</a></h1>
+				<h2 class="blog-motto">告诉自己，你还需要更加努力!!</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+						<form class="search" action="https://www.baidu.com/" target="_blank">
+							<label>Search</label>
+						<input name="s" type="hidden" value= null ><input type="text" name="q" size="30" placeholder="搜索"><br>
+						</form>
+					
+					</li>
+				</ul>
+			</nav>
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <meta name="baidu-site-verification" content="g6aOnZn9cI" />
+  <h1 itemprop="name">
+    
+      <a href="/2016/11/29/Message-Looper-and-MessageQueue-创建2/" title="Looper and MessageQueue创建" itemprop="url">Looper and MessageQueue创建</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="小强" target="_blank" itemprop="author">小强</a>
+		
+  <p class="article-time">
+    <time datetime="2016-11-29T02:31:13.000Z" itemprop="datePublished"> 发表于 2016-11-29</time>
+
+  </p>
+</header>
+
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Looper-and-MessageQueue"><span class="toc-number">1.</span> <span class="toc-text">Looper and MessageQueue</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Looper"><span class="toc-number">1.1.</span> <span class="toc-text">Looper</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#描述"><span class="toc-number">1.1.1.</span> <span class="toc-text">描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建"><span class="toc-number">1.1.2.</span> <span class="toc-text">创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#我的问题"><span class="toc-number">1.1.3.</span> <span class="toc-text">我的问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MessageQueue"><span class="toc-number">1.2.</span> <span class="toc-text">MessageQueue</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#描述-1"><span class="toc-number">1.2.1.</span> <span class="toc-text">描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建-1"><span class="toc-number">1.2.2.</span> <span class="toc-text">创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#我的问题-1"><span class="toc-number">1.2.3.</span> <span class="toc-text">我的问题</span></a></li></ol></li></ol></li></ol>
+		
+		</div>
+		
+		<h1 id="Looper-and-MessageQueue"><a href="#Looper-and-MessageQueue" class="headerlink" title="Looper and MessageQueue"></a>Looper and MessageQueue</h1><h2 id="Looper"><a href="#Looper" class="headerlink" title="Looper"></a>Looper</h2><h3 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h3><pre><code>Looper主要是在线程中开启一个循环队列。
+就像Android API文档中描述的那样。调用prepare()创建，调用loop开始循环。
+</code></pre><h3 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="number">1</span>. Looper.prepare(); </div><div class="line"><span class="number">2</span>. Looper.prepareMainLooper(); </div><div class="line"><span class="comment">// API 文档中说了，这个方法是系统调用的。我们永远不能调用这个方法。</span></div></pre></td></tr></table></figure>
+<pre><code>1. 在prepare中，首先判断的是当前线程中是否已经使用过Looper.如果已经存在一个就抛出异常。这个使用的是ThreadLocal进行判断的额。
+2. 在构造方法中创建了MessageQueue和获取当前线程的对象
+3. 在loop中，主要是从MessageQueue中取出每一个Message。在获取Message中保留的target中的Handler对象,分发每一个Message。
+</code></pre><h3 id="我的问题"><a href="#我的问题" class="headerlink" title="我的问题"></a>我的问题</h3><p>下面这段代码干嘛的？</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Printer logging = me.mLogging;</div><div class="line"><span class="keyword">if</span> (logging != <span class="keyword">null</span>) &#123;</div><div class="line">   logging.println(<span class="string">"&gt;&gt;&gt;&gt;&gt; Dispatching to "</span> + msg.target + <span class="string">" "</span> +msg.callback + <span class="string">": "</span> + msg.what);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre><code>通过代码测试了一下，发现是调试日志的使用方式。
+这种方式是好还是不好？
+在编写SDK过程中，我是不是也可以使用这种形式去让其他开发者处理调试日志呢？
+</code></pre><h2 id="MessageQueue"><a href="#MessageQueue" class="headerlink" title="MessageQueue"></a>MessageQueue</h2><h3 id="描述-1"><a href="#描述-1" class="headerlink" title="描述"></a>描述</h3><pre><code>一个先进先出的队列
+</code></pre><h3 id="创建-1"><a href="#创建-1" class="headerlink" title="创建"></a>创建</h3><pre><code>在Looper创建的时候，会new 一个新的MessageQueue。
+一个消息，add到MessageQueue的位置：
+    在Handler中，是调用MessageQueue.enqueueMessage(Handler,long)方法把每一个Message添加到队列中。
+</code></pre><h3 id="我的问题-1"><a href="#我的问题-1" class="headerlink" title="我的问题"></a>我的问题</h3><ol>
+<li><p>MessageQueue都有哪些方法。感觉不能自己单独使用MessageQueue</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="number">1</span>.addIdleHandler(MessageQueue.IdleHandler handler)</div><div class="line"><span class="number">2</span>.removeIdleHandler(MessageQueue.IdleHandler handler)</div><div class="line"><span class="number">3</span>. addOnFileDescriptorEventListener(FileDescriptor fd, <span class="keyword">int</span> events, MessageQueue.OnFileDescriptorEventListener listener)<span class="comment">//看不懂</span></div><div class="line"><span class="number">4</span>. removeOnFileDescriptorEventListener(FileDescriptor fd)</div><div class="line"><span class="number">5</span>. isIdle() <span class="comment">// 判断当前Looper是闲置的，也就是MessageQueue</span></div></pre></td></tr></table></figure>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">  * 回调。判断当前MessageQueue是否处于空闲状态。</div><div class="line">  * return true:不自动调用removeIdleHandler。</div><div class="line">  *        false: 自动调用removeIdleHandler.</div><div class="line">  */</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">interface</span> <span class="title">IdleHandler</span> </span>&#123;</div><div class="line">       <span class="function"><span class="keyword">boolean</span> <span class="title">queueIdle</span><span class="params">()</span></span>;</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>如何实现时间相关的添加？</p>
+<p> 新加入的Message按执行时间插入到原有的队列中，然后根据情况调用nativeAwake函数。</p>
+</li>
+</ol>
+<p><a href="http://blog.csdn.net/gaugamela/article/details/52599512" target="_blank" rel="external">大神博客：Android7.0 MessageQueue</a></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/android/">android</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/source/">source</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	<div class="share-jiathis">
+	  
+<div class="jiathis_style_24x24">
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_googleplus"></a>
+	<a class="jiathis_button_douban"></a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+    var jiathis_config={
+    data_track_clickback:true,
+    sm:"copy,renren,cqq",
+    pic:"",
+    summary:"",
+    
+  </script> 
+<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=
+" charset="utf-8"></script>      
+
+	 </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2016/11/28/Message-Looper-and-MessageQueue-创建/"  title="Message创建">
+ <strong>下一篇：</strong><br/> 
+ <span>Message创建
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Looper-and-MessageQueue"><span class="toc-number">1.</span> <span class="toc-text">Looper and MessageQueue</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Looper"><span class="toc-number">1.1.</span> <span class="toc-text">Looper</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#描述"><span class="toc-number">1.1.1.</span> <span class="toc-text">描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建"><span class="toc-number">1.1.2.</span> <span class="toc-text">创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#我的问题"><span class="toc-number">1.1.3.</span> <span class="toc-text">我的问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MessageQueue"><span class="toc-number">1.2.</span> <span class="toc-text">MessageQueue</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#描述-1"><span class="toc-number">1.2.1.</span> <span class="toc-text">描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建-1"><span class="toc-number">1.2.2.</span> <span class="toc-text">创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#我的问题-1"><span class="toc-number">1.2.3.</span> <span class="toc-text">我的问题</span></a></li></ol></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/android/" title="android">android<sup>10</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/other/" title="other">other<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/bug/" title="bug">bug<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/source/" title="source">source<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/function/" title="function">function<sup>2</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://blog.csdn.net/" target="_blank" title="CSDN社区">CSDN 社区</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://developer.android.com/index.html" target="_blank" title="android developer">android developer</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://developers.google.com/vr/" target="_blank" title="google vr">google vr</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=null&verifier=3a89c19b&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p>  IT小强,希望每天都开心 <br/>
+			写给自己的博客</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/3535012745" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/827498077@qq.com" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:827498077@qq.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+	 	 博客创建日期 @ 2016.11.05 19:00
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?26cff7ff569b956a445199e85c2a0e30";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
+
