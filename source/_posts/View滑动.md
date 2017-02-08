@@ -16,7 +16,7 @@ b --> |3.0以上版本|e[属性动画]
 b --> |只是影像滑东,事件还在原来位置|f[传统动画]
 View --> c(通过改变布局参数)
 ```
-![View动画流程图](/images/View动画.png)
+![View动画流程图](/images/view_huadong.png)
 ### 使用ScrollTo 和 ScrollBy
  只能实现View内容在View内的变动。
  ```java
