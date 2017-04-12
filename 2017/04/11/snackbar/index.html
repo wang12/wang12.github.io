@@ -1,0 +1,560 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="baidu-site-verification" content="g6aOnZn9cI" />
+  
+    <title>snackbar | hello,world!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="小强">
+    
+
+    
+    <meta name="description" content="[TOC]
+Snackbar 以及注意事项介绍Snackbar出现在Android5.1以后，按照官方的介绍：Snackbar为了给提供一种简单快捷的操作。
+在使用snackbar时，我们要导入design包.
+注意事项
+必须导入V7包并且使用AppCompatActivity
+在CoordinatorLayout下使用Snackbar才支持侧滑功能
+
+最简单的Snackbar123456/***">
+<meta property="og:type" content="article">
+<meta property="og:title" content="snackbar">
+<meta property="og:url" content="https://wang12.github.io/2017/04/11/snackbar/index.html">
+<meta property="og:site_name" content="hello,world!">
+<meta property="og:description" content="[TOC]
+Snackbar 以及注意事项介绍Snackbar出现在Android5.1以后，按照官方的介绍：Snackbar为了给提供一种简单快捷的操作。
+在使用snackbar时，我们要导入design包.
+注意事项
+必须导入V7包并且使用AppCompatActivity
+在CoordinatorLayout下使用Snackbar才支持侧滑功能
+
+最简单的Snackbar123456/***">
+<meta property="og:image" content="http://note.youdao.com/yws/public/resource/b6ad28b3c1f377a862b1603d1cdff24b/xmlnote/599B4E4CBA4740419AF88D28B0DCE0A4/9823">
+<meta property="og:image" content="http://note.youdao.com/yws/public/resource/b6ad28b3c1f377a862b1603d1cdff24b/xmlnote/37E865A4BA7F471282B076E816CA769B/9854">
+<meta property="og:image" content="http://note.youdao.com/yws/public/resource/b6ad28b3c1f377a862b1603d1cdff24b/xmlnote/F20253A26A874AF485D5B969D7C3FEBA/9920">
+<meta property="og:image" content="http://note.youdao.com/yws/public/resource/b6ad28b3c1f377a862b1603d1cdff24b/xmlnote/11B3B843CF67433997A450D3259C103B/9926">
+<meta property="og:image" content="http://note.youdao.com/yws/public/resource/b6ad28b3c1f377a862b1603d1cdff24b/xmlnote/E185D6700F0A4C63B4362CA24CCFAACD/9913">
+<meta property="og:image" content="http://note.youdao.com/yws/public/resource/b6ad28b3c1f377a862b1603d1cdff24b/xmlnote/5C55FF1DDB6E447CA053F881E872E47F/9956">
+<meta property="og:updated_time" content="2017-04-10T16:15:17.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="snackbar">
+<meta name="twitter:description" content="[TOC]
+Snackbar 以及注意事项介绍Snackbar出现在Android5.1以后，按照官方的介绍：Snackbar为了给提供一种简单快捷的操作。
+在使用snackbar时，我们要导入design包.
+注意事项
+必须导入V7包并且使用AppCompatActivity
+在CoordinatorLayout下使用Snackbar才支持侧滑功能
+
+最简单的Snackbar123456/***">
+<meta name="twitter:image" content="http://note.youdao.com/yws/public/resource/b6ad28b3c1f377a862b1603d1cdff24b/xmlnote/599B4E4CBA4740419AF88D28B0DCE0A4/9823">
+
+    
+    <link rel="alternative" href="/atom.xml" title="hello,world!" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/logo.png">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <meta name="baidu-site-verification" content="g6aOnZn9cI" />
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="hello,world!" title="hello,world!"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="hello,world!">hello,world!</a></h1>
+				<h2 class="blog-motto">告诉自己，你还需要更加努力!!</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+						<form class="search" action="https://www.baidu.com/" target="_blank">
+							<label>Search</label>
+						<input name="s" type="hidden" value= null ><input type="text" name="q" size="30" placeholder="搜索"><br>
+						</form>
+					
+					</li>
+				</ul>
+			</nav>
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <meta name="baidu-site-verification" content="g6aOnZn9cI" />
+  <h1 itemprop="name">
+    
+      <a href="/2017/04/11/snackbar/" title="snackbar" itemprop="url">snackbar</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="小强" target="_blank" itemprop="author">小强</a>
+		
+  <p class="article-time">
+    <time datetime="2017-04-10T16:14:48.000Z" itemprop="datePublished"> 发表于 2017-04-11</time>
+
+  </p>
+</header>
+
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Snackbar-以及注意事项"><span class="toc-number">1.</span> <span class="toc-text">Snackbar 以及注意事项</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#介绍"><span class="toc-number">1.1.</span> <span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注意事项"><span class="toc-number">1.2.</span> <span class="toc-text">注意事项</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最简单的Snackbar"><span class="toc-number">1.3.</span> <span class="toc-text">最简单的Snackbar</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Snackbar显示时间"><span class="toc-number">1.4.</span> <span class="toc-text">Snackbar显示时间</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Snackbar动作"><span class="toc-number">1.5.</span> <span class="toc-text">Snackbar动作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#添加一个简单的行为"><span class="toc-number">1.5.1.</span> <span class="toc-text">添加一个简单的行为</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Snackbar主动动作"><span class="toc-number">1.5.2.</span> <span class="toc-text">Snackbar主动动作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#监听Snackbar的状态"><span class="toc-number">1.5.3.</span> <span class="toc-text">监听Snackbar的状态</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义Snackbar"><span class="toc-number">1.6.</span> <span class="toc-text">自定义Snackbar</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#修改背景色和修改msg字体颜色"><span class="toc-number">1.6.1.</span> <span class="toc-text">修改背景色和修改msg字体颜色</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#自定义图标"><span class="toc-number">1.6.2.</span> <span class="toc-text">自定义图标</span></a></li></ol></li></ol></li></ol>
+		
+		</div>
+		
+		<p>[TOC]</p>
+<h1 id="Snackbar-以及注意事项"><a href="#Snackbar-以及注意事项" class="headerlink" title="Snackbar 以及注意事项"></a>Snackbar 以及注意事项</h1><h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>Snackbar出现在Android5.1以后，按照官方的介绍：Snackbar为了给提供一种简单快捷的操作。</p>
+<p>在使用snackbar时，我们要导入design包.</p>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><ol>
+<li>必须导入V7包并且使用AppCompatActivity</li>
+<li>在CoordinatorLayout下使用Snackbar才支持侧滑功能</li>
+</ol>
+<h2 id="最简单的Snackbar"><a href="#最简单的Snackbar" class="headerlink" title="最简单的Snackbar"></a>最简单的Snackbar</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">* <span class="doctag">@param</span> view 通过这个View查找父布局</div><div class="line">* <span class="doctag">@param</span> msg 需要显示的消息</div><div class="line">* <span class="doctag">@params</span> Snackbar.LENGTH_SHORT 显示时间，和toast一样</div><div class="line">*/</div><div class="line">Snackbar.make(view,msg,Snackbar.LENGTH_SHORT).show();</div></pre></td></tr></table></figure>
+<p>Snackbar会把自己加在符合条件的父层布局，至于什么是符合条件可以看下面的源码：<br><img src="http://note.youdao.com/yws/public/resource/b6ad28b3c1f377a862b1603d1cdff24b/xmlnote/599B4E4CBA4740419AF88D28B0DCE0A4/9823" alt="image"><br>可以通过make方法的源码看到，如果view 或者View的父布局是CoordinatorLayout，那么直接加载CoordinatorLayout上。</p>
+<p>如果是Framelayout,并且是content根布局，那么就显示在根布局上。</p>
+<p>如果不是根布局,那么就暂存，继续找下一个。一直找到根布局</p>
+<p><strong><em>因为Snackbar是添加到View中的，所以和Toast相比，Snackbar当Activity不可见的时候也会消失</em></strong></p>
+<h2 id="Snackbar显示时间"><a href="#Snackbar显示时间" class="headerlink" title="Snackbar显示时间"></a>Snackbar显示时间</h2><ul>
+<li>Snackbar.LENGTH_INDEFINITE 不消失显示，除非手动取消</li>
+<li>Snackbar.LENGTH_SHORT 短时间显示</li>
+<li>Snackbar.LENGTH_LONG 长时间显示</li>
+<li>自定义一个毫秒值<br>这一点上，Snackbar比Toast多了一个不消失可以自定义时间<h2 id="Snackbar动作"><a href="#Snackbar动作" class="headerlink" title="Snackbar动作"></a>Snackbar动作</h2><h3 id="添加一个简单的行为"><a href="#添加一个简单的行为" class="headerlink" title="添加一个简单的行为"></a>添加一个简单的行为</h3><img src="http://note.youdao.com/yws/public/resource/b6ad28b3c1f377a862b1603d1cdff24b/xmlnote/37E865A4BA7F471282B076E816CA769B/9854" alt="image"></li>
+</ul>
+<ol>
+<li>添加一个string的资源ID当做动作触发点。</li>
+<li>直接添加一个字符串当做动作的触发点。</li>
+<li>设置动作的颜色，</li>
+</ol>
+<h3 id="Snackbar主动动作"><a href="#Snackbar主动动作" class="headerlink" title="Snackbar主动动作"></a>Snackbar主动动作</h3><ul>
+<li>show() 调用后显示Snackbar</li>
+<li>dismiss() 调用后隐藏Snackbar</li>
+<li>getContext() 获取父布局所使用的Context</li>
+<li>getDuration() 当前设置的超时时间</li>
+<li>getView() Snackbar所对应的SnackbarBaseLayout，自定义Sanckbar就靠它了</li>
+<li>isShown() 判断当前Snackbar是否正在显示</li>
+<li>isShownOrQueued() 判断当前Snackbar是否正在显示或者已经添加到队列里</li>
+<li>setDuration(int duration) 设置消失时间<h3 id="监听Snackbar的状态"><a href="#监听Snackbar的状态" class="headerlink" title="监听Snackbar的状态"></a>监听Snackbar的状态</h3>可以通过addCallback(BaseCallback<b> callback)监听Snackbar的显示和消失，通过removeCallback(BaseCallback<b> callback)清除这种监听。<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">bar.addCallback(<span class="keyword">new</span> BaseTransientBottomBar.BaseCallback&lt;Snackbar&gt;() &#123;</div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onDismissed</span><span class="params">(Snackbar transientBottomBar, <span class="keyword">int</span> event)</span> </span>&#123;</div><div class="line">Log.d(<span class="string">"q"</span>,<span class="string">"Snackbar 消时了"</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onShown</span><span class="params">(Snackbar transientBottomBar)</span> </span>&#123;</div><div class="line">Log.d(<span class="string">"q"</span>,<span class="string">"Snackbar 显示了"</span>);</div><div class="line">&#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</b></b></li>
+</ul>
+<h2 id="自定义Snackbar"><a href="#自定义Snackbar" class="headerlink" title="自定义Snackbar"></a>自定义Snackbar</h2><h3 id="修改背景色和修改msg字体颜色"><a href="#修改背景色和修改msg字体颜色" class="headerlink" title="修改背景色和修改msg字体颜色"></a>修改背景色和修改msg字体颜色</h3><p><img src="http://note.youdao.com/yws/public/resource/b6ad28b3c1f377a862b1603d1cdff24b/xmlnote/F20253A26A874AF485D5B969D7C3FEBA/9920" alt="image"></p>
+<p>通过源码发现，Snackbar加载了一个R.layout.design_layout_snackbar_include的布局文件。</p>
+<p>打开这个布局文件<br><img src="http://note.youdao.com/yws/public/resource/b6ad28b3c1f377a862b1603d1cdff24b/xmlnote/11B3B843CF67433997A450D3259C103B/9926" alt="image"><br>所以要改变背景色和msg字体颜色可以进行如下的操作<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">bar.getView().setBackgroundColor(<span class="number">0xff0000ff</span>);</div><div class="line">((TextView)bar.getView().findViewById(android.support.design.R.id.snackbar_text)).setTextColor(<span class="number">0xffff0000</span>);</div></pre></td></tr></table></figure></p>
+<h3 id="自定义图标"><a href="#自定义图标" class="headerlink" title="自定义图标"></a>自定义图标</h3><p>Snackbar使用的是SnackbarLayout当做父布局，SnackbarLayout是一个FrameLayout。<br>所以可以通过如下代码增加View：<br><img src="http://note.youdao.com/yws/public/resource/b6ad28b3c1f377a862b1603d1cdff24b/xmlnote/E185D6700F0A4C63B4362CA24CCFAACD/9913" alt="image"><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Snackbar bar = Snackbar.make(view,msg,<span class="number">10</span>*<span class="number">1000</span>);</div><div class="line">Snackbar.SnackbarLayout layout = (Snackbar.SnackbarLayout) bar.getView();</div><div class="line">ImageView image = <span class="keyword">new</span> ImageView(bar.getContext());</div><div class="line">image.setBackgroundColor(<span class="number">0x00ffffff</span>); image.setImageResource(R.drawable.xingxing);</div><div class="line">FrameLayout.LayoutParams params = <span class="keyword">new</span> FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT);</div><div class="line">params.gravity = Gravity.CENTER_VERTICAL|Gravity.RIGHT;</div><div class="line">layout.addView(image,params);</div><div class="line">bar.show();</div></pre></td></tr></table></figure></p>
+<p>最终的效果图：</p>
+<p><img src="http://note.youdao.com/yws/public/resource/b6ad28b3c1f377a862b1603d1cdff24b/xmlnote/5C55FF1DDB6E447CA053F881E872E47F/9956" alt="image"></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/android/">android</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/学习/">学习</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	<div class="share-jiathis">
+	  
+<div class="jiathis_style_24x24">
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_googleplus"></a>
+	<a class="jiathis_button_douban"></a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+    var jiathis_config={
+    data_track_clickback:true,
+    sm:"copy,renren,cqq",
+    pic:"",
+    summary:"",
+    
+  </script> 
+<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=
+" charset="utf-8"></script>      
+
+	 </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2017/04/12/CoordinatorLayout/" title="CoordinatorLayout">
+  <strong>上一篇：</strong><br/>
+  <span>
+  CoordinatorLayout</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2017/04/09/AppCompatActivity/"  title="AppCompatActivity">
+ <strong>下一篇：</strong><br/> 
+ <span>AppCompatActivity
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Snackbar-以及注意事项"><span class="toc-number">1.</span> <span class="toc-text">Snackbar 以及注意事项</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#介绍"><span class="toc-number">1.1.</span> <span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注意事项"><span class="toc-number">1.2.</span> <span class="toc-text">注意事项</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最简单的Snackbar"><span class="toc-number">1.3.</span> <span class="toc-text">最简单的Snackbar</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Snackbar显示时间"><span class="toc-number">1.4.</span> <span class="toc-text">Snackbar显示时间</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Snackbar动作"><span class="toc-number">1.5.</span> <span class="toc-text">Snackbar动作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#添加一个简单的行为"><span class="toc-number">1.5.1.</span> <span class="toc-text">添加一个简单的行为</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Snackbar主动动作"><span class="toc-number">1.5.2.</span> <span class="toc-text">Snackbar主动动作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#监听Snackbar的状态"><span class="toc-number">1.5.3.</span> <span class="toc-text">监听Snackbar的状态</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义Snackbar"><span class="toc-number">1.6.</span> <span class="toc-text">自定义Snackbar</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#修改背景色和修改msg字体颜色"><span class="toc-number">1.6.1.</span> <span class="toc-text">修改背景色和修改msg字体颜色</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#自定义图标"><span class="toc-number">1.6.2.</span> <span class="toc-text">自定义图标</span></a></li></ol></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/android/" title="android">android<sup>16</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/other/" title="other">other<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/bug/" title="bug">bug<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/学习/" title="学习">学习<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/source/" title="source">source<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/function/" title="function">function<sup>3</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://blog.csdn.net/" target="_blank" title="CSDN社区">CSDN 社区</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://developer.android.com/index.html" target="_blank" title="android developer">android developer</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://developers.google.com/vr/" target="_blank" title="google vr">google vr</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=null&verifier=3a89c19b&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p>  IT小强,希望每天都开心 <br/>
+			写给自己的博客</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/3535012745" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/827498077@qq.com" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:827498077@qq.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+	 	 博客创建日期 @ 2016.11.05 19:00
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?26cff7ff569b956a445199e85c2a0e30";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
+

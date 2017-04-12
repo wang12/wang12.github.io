@@ -1,0 +1,575 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="baidu-site-verification" content="g6aOnZn9cI" />
+  
+    <title>CoordinatorLayout | hello,world!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="小强">
+    
+
+    
+    <meta name="description" content="[TOC]
+CoordinatorLayoutCoordinatorLayout 主要使用于以下两个场景
+
+作为一个顶层父容器出现
+协调一个或多个子View之间的交互
+
+CoordinatorLayout 通过Behaviors指定子View的交互行为。
+使用CoordinatorLayout需要导入design包
+我进入的误区才开始接手CoordinatorLayout，没有理清Coordina">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CoordinatorLayout">
+<meta property="og:url" content="https://wang12.github.io/2017/04/12/CoordinatorLayout/index.html">
+<meta property="og:site_name" content="hello,world!">
+<meta property="og:description" content="[TOC]
+CoordinatorLayoutCoordinatorLayout 主要使用于以下两个场景
+
+作为一个顶层父容器出现
+协调一个或多个子View之间的交互
+
+CoordinatorLayout 通过Behaviors指定子View的交互行为。
+使用CoordinatorLayout需要导入design包
+我进入的误区才开始接手CoordinatorLayout，没有理清Coordina">
+<meta property="og:image" content="http://note.youdao.com/yws/public/resource/b6ad28b3c1f377a862b1603d1cdff24b/xmlnote/ECB8DA547F484500BED50BE1DBCEC046/10027">
+<meta property="og:image" content="http://note.youdao.com/yws/public/resource/b6ad28b3c1f377a862b1603d1cdff24b/xmlnote/43DC93CC54244A92813AFEE396E52207/10055">
+<meta property="og:image" content="http://note.youdao.com/yws/public/resource/b6ad28b3c1f377a862b1603d1cdff24b/xmlnote/039C765856384713BFF2335064377855/10075">
+<meta property="og:image" content="http://note.youdao.com/yws/public/resource/b6ad28b3c1f377a862b1603d1cdff24b/xmlnote/D5F323AC4E8E42A3A4CDF20F2252D711/10084">
+<meta property="og:image" content="http://note.youdao.com/yws/public/resource/b6ad28b3c1f377a862b1603d1cdff24b/xmlnote/ACFD33793BDA47668643CB3D66FD053C/10086">
+<meta property="og:image" content="http://note.youdao.com/yws/public/resource/b6ad28b3c1f377a862b1603d1cdff24b/xmlnote/9C9445B702704C56B373E5912BA74C04/10118">
+<meta property="og:updated_time" content="2017-04-12T12:47:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CoordinatorLayout">
+<meta name="twitter:description" content="[TOC]
+CoordinatorLayoutCoordinatorLayout 主要使用于以下两个场景
+
+作为一个顶层父容器出现
+协调一个或多个子View之间的交互
+
+CoordinatorLayout 通过Behaviors指定子View的交互行为。
+使用CoordinatorLayout需要导入design包
+我进入的误区才开始接手CoordinatorLayout，没有理清Coordina">
+<meta name="twitter:image" content="http://note.youdao.com/yws/public/resource/b6ad28b3c1f377a862b1603d1cdff24b/xmlnote/ECB8DA547F484500BED50BE1DBCEC046/10027">
+
+    
+    <link rel="alternative" href="/atom.xml" title="hello,world!" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/logo.png">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <meta name="baidu-site-verification" content="g6aOnZn9cI" />
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="hello,world!" title="hello,world!"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="hello,world!">hello,world!</a></h1>
+				<h2 class="blog-motto">告诉自己，你还需要更加努力!!</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+						<form class="search" action="https://www.baidu.com/" target="_blank">
+							<label>Search</label>
+						<input name="s" type="hidden" value= null ><input type="text" name="q" size="30" placeholder="搜索"><br>
+						</form>
+					
+					</li>
+				</ul>
+			</nav>
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <meta name="baidu-site-verification" content="g6aOnZn9cI" />
+  <h1 itemprop="name">
+    
+      <a href="/2017/04/12/CoordinatorLayout/" title="CoordinatorLayout" itemprop="url">CoordinatorLayout</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="小强" target="_blank" itemprop="author">小强</a>
+		
+  <p class="article-time">
+    <time datetime="2017-04-12T12:46:01.000Z" itemprop="datePublished"> 发表于 2017-04-12</time>
+
+  </p>
+</header>
+
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#CoordinatorLayout"><span class="toc-number">1.</span> <span class="toc-text">CoordinatorLayout</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#我进入的误区"><span class="toc-number">1.1.</span> <span class="toc-text">我进入的误区</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CoordinatorLayout简单使用"><span class="toc-number">1.2.</span> <span class="toc-text">CoordinatorLayout简单使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#布局"><span class="toc-number">1.2.1.</span> <span class="toc-text">布局</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现效果"><span class="toc-number">1.2.2.</span> <span class="toc-text">实现效果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#疑问"><span class="toc-number">1.2.3.</span> <span class="toc-text">疑问</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Behavior"><span class="toc-number">1.3.</span> <span class="toc-text">Behavior</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AppBarLayout"><span class="toc-number">1.4.</span> <span class="toc-text">AppBarLayout</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码实现"><span class="toc-number">1.5.</span> <span class="toc-text">代码实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#后记"><span class="toc-number">1.6.</span> <span class="toc-text">后记</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<p>[TOC]</p>
+<h1 id="CoordinatorLayout"><a href="#CoordinatorLayout" class="headerlink" title="CoordinatorLayout"></a>CoordinatorLayout</h1><p>CoordinatorLayout 主要使用于以下两个场景</p>
+<ul>
+<li>作为一个顶层父容器出现</li>
+<li>协调一个或多个子View之间的交互</li>
+</ul>
+<p>CoordinatorLayout 通过Behaviors指定子View的交互行为。</p>
+<p>使用CoordinatorLayout需要导入design包</p>
+<h2 id="我进入的误区"><a href="#我进入的误区" class="headerlink" title="我进入的误区"></a>我进入的误区</h2><p>才开始接手CoordinatorLayout，没有理清CoordinatorLayout的具体用途和使用场所。所以在学习过程中出现了很多不必要的问题。</p>
+<ol>
+<li>刚开始以为CoordinatorLayout和FrameLayout之类的布局一样，没有认清CoordinatorLayout的作用</li>
+<li>忽视了Behavior的重要性。</li>
+<li>不熟悉CoordinatorLayout，想着直接可以上手，忽视了对Demo的研究<h2 id="CoordinatorLayout简单使用"><a href="#CoordinatorLayout简单使用" class="headerlink" title="CoordinatorLayout简单使用"></a>CoordinatorLayout简单使用</h2>CoordinatorLayout的核心就是Behavior，Behavior就是定制子View的行为。<h3 id="布局"><a href="#布局" class="headerlink" title="布局"></a>布局</h3>CoordinatorLayout 继承与ViewGroup，但是最基本的表现形式和FrameLayout很相识。</li>
+</ol>
+<p>也就是布局是重叠的从左上角开始。</p>
+<p>如果要用好CoordinatorLayout,那么最基本的就是通过Behavior去控制。</p>
+<h3 id="实现效果"><a href="#实现效果" class="headerlink" title="实现效果"></a>实现效果</h3><p>想通过CoordinatorLayout布局，实现顶层Toolbar加中间Fragment加底部菜单这种通用型的布局。</p>
+<ul>
+<li>更换父布局为android.support.design.widget.CoordinatorLayout</li>
+<li>按照网上的实例，对toolbar上封装一层AppBarLayout</li>
+<li><p>添加frameLayout布局。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">FrameLayout</span></span></div><div class="line"><span class="attr">android:id</span>=<span class="string">"@+id/fragmet_layout"</span></div><div class="line"><span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line"><span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></div><div class="line"><span class="attr">android:background</span>=<span class="string">"#ffffffff"</span></div><div class="line"><span class="attr">app:layout_behavior</span>=<span class="string">"@string/appbar_scrolling_view_behavior"</span>&gt;</div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">FrameLayout</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>添加底部布局LinearLayout.因为CoordinatorLayout表现形式和FrameLayout很相识，所以底部布局我直接增加底部对齐</p>
+</li>
+</ul>
+<p>很好，效果实现了。效果图如下：<br><img src="http://note.youdao.com/yws/public/resource/b6ad28b3c1f377a862b1603d1cdff24b/xmlnote/ECB8DA547F484500BED50BE1DBCEC046/10027" alt="image"></p>
+<h3 id="疑问"><a href="#疑问" class="headerlink" title="疑问"></a>疑问</h3><ul>
+<li>对于网上的事例，我首先的问题是，Toolbar必须用AppBarLayout封装么？</li>
+</ul>
+<p>我动手删掉了AppBarLayout，然后运行效果是：Toolbar直接不显示了！好诡异，开始纠结这个问题。半个小时后发现，Toolbar被FrameLayout给覆盖住了..</p>
+<p>但是结果还是不对啊？难道要我主动对frameLayout增加一个marginTop?如果我不知道toolbar的高度，或者不好获取这个高度，那不是坑大了？</p>
+<ul>
+<li>对比发现唯一的不同之处就是多了layout_behavior属性。这个属性是干什么的？</li>
+</ul>
+<p>看到这里。要感谢大神写的博客<a href="http://blog.csdn.net/huachao1001/article/details/51554608" target="_blank" rel="external">CoordinatorLayout的使用如此简单</a>.</p>
+<p>因为发现各种的坑，又不明白原理。基本快对CoordinatorLayout打差评的我，发现这个博客，然后一步一步研究这个，并且根据网上各种人的说法，把重心放在Behavior上。然后研究behavior的layoutDependsOn和onDependentViewChanged方法。</p>
+<h2 id="Behavior"><a href="#Behavior" class="headerlink" title="Behavior"></a>Behavior</h2><p>最主要的两个方法：<br><img src="http://note.youdao.com/yws/public/resource/b6ad28b3c1f377a862b1603d1cdff24b/xmlnote/43DC93CC54244A92813AFEE396E52207/10055" alt="image"><br>可以看到大神的介绍：</p>
+<ul>
+<li>layoutDependsOn主要是判断child布局是否依赖当前这个View。</li>
+<li>onDependentViewChanged主要是当依赖的View改变时，这个child布局改变动作</li>
+</ul>
+<p>看到这里，我突然有点明白了，CoordinatorLayout是协调一个或多个子View之间的交互。那么FrameLayout在Toolbar下面出现，这是不是也是一种依赖关系呢？</p>
+<p>如果是我想的这样，那么我会在layoutDependsOn检查当dependency是Toolbar的时候，就返回true</p>
+<p>在onDependentViewChanged的方法中，获取dependency的高度，然后动态的把这个高度设置给child,也就是FrameLayout。</p>
+<h2 id="AppBarLayout"><a href="#AppBarLayout" class="headerlink" title="AppBarLayout"></a>AppBarLayout</h2><p>懒得动手，我选择直接去找AppBarLayout中是如何实现Behavior中的两个方法的。打算复制过来看看。<br><img src="http://note.youdao.com/yws/public/resource/b6ad28b3c1f377a862b1603d1cdff24b/xmlnote/039C765856384713BFF2335064377855/10075" alt="layoutDependsOn"></p>
+<p>layoutDependsOn实现很简单粗暴。dependency是AppBarLayout,那么就返回true<br><img src="http://note.youdao.com/yws/public/resource/b6ad28b3c1f377a862b1603d1cdff24b/xmlnote/D5F323AC4E8E42A3A4CDF20F2252D711/10084" alt="onDependentViewChanged"></p>
+<p><img src="http://note.youdao.com/yws/public/resource/b6ad28b3c1f377a862b1603d1cdff24b/xmlnote/ACFD33793BDA47668643CB3D66FD053C/10086" alt="offsetChildAsNeeded"></p>
+<p>虽然没用过ViewCompat.offsetTopBottom方法，但是大概理解这个方法的意思。好吧，我的猜想完全是正确的。</p>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">android.support.design.widget.CoordinatorLayout</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></div><div class="line"><span class="attr">xmlns:app</span>=<span class="string">"http://schemas.android.com/apk/res-auto"</span></div><div class="line"><span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line"><span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span>&gt;</div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">FrameLayout</span></span></div><div class="line"><span class="attr">android:id</span>=<span class="string">"@+id/fragmet_layout"</span></div><div class="line"><span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line"><span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></div><div class="line"><span class="attr">android:background</span>=<span class="string">"#00ffffff"</span></div><div class="line"><span class="attr">app:layout_behavior</span>=<span class="string">"com.xiaoqiang.view.MyBehavior"</span>&gt;</div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">FrameLayout</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">include</span> <span class="attr">layout</span>=<span class="string">"@layout/tool_bar_base"</span> /&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">LinearLayout</span></span></div><div class="line"><span class="attr">android:id</span>=<span class="string">"@+id/rl_bottom_menu"</span></div><div class="line"><span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line"><span class="attr">android:layout_height</span>=<span class="string">"80dp"</span></div><div class="line"><span class="attr">android:layout_alignParentBottom</span>=<span class="string">"true"</span></div><div class="line"><span class="attr">android:layout_gravity</span>=<span class="string">"bottom"</span></div><div class="line"><span class="attr">android:orientation</span>=<span class="string">"horizontal"</span>&gt;</div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">Button</span></span></div><div class="line"><span class="attr">android:id</span>=<span class="string">"@+id/btn_first"</span></div><div class="line"><span class="attr">android:layout_width</span>=<span class="string">"0dp"</span></div><div class="line"><span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></div><div class="line"><span class="attr">android:layout_weight</span>=<span class="string">"1"</span></div><div class="line"><span class="attr">android:text</span>=<span class="string">"first"</span> /&gt;</div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">Button</span></span></div><div class="line"><span class="attr">android:id</span>=<span class="string">"@+id/btn_second"</span></div><div class="line"><span class="attr">android:layout_width</span>=<span class="string">"0dp"</span></div><div class="line"><span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></div><div class="line"><span class="attr">android:layout_weight</span>=<span class="string">"1"</span></div><div class="line"><span class="attr">android:text</span>=<span class="string">"second"</span> /&gt;</div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">Button</span></span></div><div class="line"><span class="attr">android:id</span>=<span class="string">"@+id/btn_three"</span></div><div class="line"><span class="attr">android:layout_width</span>=<span class="string">"0dp"</span></div><div class="line"><span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></div><div class="line"><span class="attr">android:layout_weight</span>=<span class="string">"1"</span></div><div class="line"><span class="attr">android:text</span>=<span class="string">"three"</span> /&gt;</div><div class="line"><span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">android.support.design.widget.CoordinatorLayout</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>app:layout_behavior=”com.xiaoqiang.view.MyBehavior”,这里我自定义了一个MyBehavior.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyBehavior</span> <span class="keyword">extends</span> <span class="title">CoordinatorLayout</span>.<span class="title">Behavior</span>&lt;<span class="title">FrameLayout</span>&gt; </span>&#123;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">MyBehavior</span><span class="params">(Context context, AttributeSet attrs)</span> </span>&#123;</div><div class="line"><span class="keyword">super</span>(context, attrs);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">layoutDependsOn</span><span class="params">(CoordinatorLayout parent, FrameLayout child, View dependency)</span> </span>&#123;</div><div class="line"><span class="keyword">return</span> dependency <span class="keyword">instanceof</span> ToolLinearLayout;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onDependentViewChanged</span><span class="params">(CoordinatorLayout parent, FrameLayout child, View dependency)</span> </span>&#123;</div><div class="line">ViewCompat.setPaddingRelative(child,<span class="number">0</span>,dependency.getBottom() - child.getTop(),<span class="number">0</span>,<span class="number">0</span>);</div><div class="line"><span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>layoutDependsOn中，当dependency是ToolLinearLayout的时候，直接返回true.这里我的想法是如果一个布局文件中有多个toolbar，那么直接使用会不会导致动作错乱。所以仿照了AppBarLayout。</p>
+<p>执行后，效果果然和我的一样。对于CoordinatorLayout也才有了一点点的理解。感觉功能很强大！</p>
+<p><img src="http://note.youdao.com/yws/public/resource/b6ad28b3c1f377a862b1603d1cdff24b/xmlnote/9C9445B702704C56B373E5912BA74C04/10118" alt="image"></p>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>在网上看博客过程中，也了解了一些CoordinatorLayout的细节。</p>
+<ul>
+<li>CoordinatorLayout只能对直接子view操作。</li>
+<li>CoordinatorLayout和一些新的控件配合，可以实现很好的效果。CoordinatorLayout是 Material Design的一种很好体现</li>
+</ul>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/android/">android</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/学习/">学习</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	<div class="share-jiathis">
+	  
+<div class="jiathis_style_24x24">
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_googleplus"></a>
+	<a class="jiathis_button_douban"></a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+    var jiathis_config={
+    data_track_clickback:true,
+    sm:"copy,renren,cqq",
+    pic:"",
+    summary:"",
+    
+  </script> 
+<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=
+" charset="utf-8"></script>      
+
+	 </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2017/04/11/snackbar/"  title="snackbar">
+ <strong>下一篇：</strong><br/> 
+ <span>snackbar
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#CoordinatorLayout"><span class="toc-number">1.</span> <span class="toc-text">CoordinatorLayout</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#我进入的误区"><span class="toc-number">1.1.</span> <span class="toc-text">我进入的误区</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CoordinatorLayout简单使用"><span class="toc-number">1.2.</span> <span class="toc-text">CoordinatorLayout简单使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#布局"><span class="toc-number">1.2.1.</span> <span class="toc-text">布局</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现效果"><span class="toc-number">1.2.2.</span> <span class="toc-text">实现效果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#疑问"><span class="toc-number">1.2.3.</span> <span class="toc-text">疑问</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Behavior"><span class="toc-number">1.3.</span> <span class="toc-text">Behavior</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AppBarLayout"><span class="toc-number">1.4.</span> <span class="toc-text">AppBarLayout</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码实现"><span class="toc-number">1.5.</span> <span class="toc-text">代码实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#后记"><span class="toc-number">1.6.</span> <span class="toc-text">后记</span></a></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/android/" title="android">android<sup>16</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/other/" title="other">other<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/bug/" title="bug">bug<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/学习/" title="学习">学习<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/source/" title="source">source<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/function/" title="function">function<sup>3</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://blog.csdn.net/" target="_blank" title="CSDN社区">CSDN 社区</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://developer.android.com/index.html" target="_blank" title="android developer">android developer</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://developers.google.com/vr/" target="_blank" title="google vr">google vr</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=null&verifier=3a89c19b&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p>  IT小强,希望每天都开心 <br/>
+			写给自己的博客</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/3535012745" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/827498077@qq.com" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:827498077@qq.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+	 	 博客创建日期 @ 2016.11.05 19:00
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?26cff7ff569b956a445199e85c2a0e30";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
+
