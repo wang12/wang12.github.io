@@ -1,0 +1,591 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="baidu-site-verification" content="g6aOnZn9cI" />
+  
+    <title>LibRTMP_Demo | hello,world!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="小强">
+    
+
+    
+    <meta name="description" content="[TOC]
+LibRtmp编译并导入Android Studio简介 做了好久的推流项目，但是没有接触过底层知识，所以只是相当于SDK的使用者。在工作不忙的时候，突然间想学一学LibRtmp。不求能完全学会，只希望能自己编译出一个可以推流的库。
+编译环境
+LibRtmp编译
+
+Ubuntu 虚拟机：36~16.04.1-Ubuntu SMP Sun Feb 5 09:39:41 UTC 2017">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LibRTMP_Demo">
+<meta property="og:url" content="https://wang12.github.io/2017/06/13/LibRTMP-Demo/index.html">
+<meta property="og:site_name" content="hello,world!">
+<meta property="og:description" content="[TOC]
+LibRtmp编译并导入Android Studio简介 做了好久的推流项目，但是没有接触过底层知识，所以只是相当于SDK的使用者。在工作不忙的时候，突然间想学一学LibRtmp。不求能完全学会，只希望能自己编译出一个可以推流的库。
+编译环境
+LibRtmp编译
+
+Ubuntu 虚拟机：36~16.04.1-Ubuntu SMP Sun Feb 5 09:39:41 UTC 2017">
+<meta property="og:image" content="http://note.youdao.com/yws/public/resource/483b08543d472f94207dd34a2d6ea7de/xmlnote/C24D1F1C0F1146B88CC8D0C2159616D8/10736">
+<meta property="og:image" content="http://note.youdao.com/yws/public/resource/483b08543d472f94207dd34a2d6ea7de/xmlnote/AA59D30D240B4E13A6F9272AD60FE2FA/10767">
+<meta property="og:updated_time" content="2017-06-13T07:49:05.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="LibRTMP_Demo">
+<meta name="twitter:description" content="[TOC]
+LibRtmp编译并导入Android Studio简介 做了好久的推流项目，但是没有接触过底层知识，所以只是相当于SDK的使用者。在工作不忙的时候，突然间想学一学LibRtmp。不求能完全学会，只希望能自己编译出一个可以推流的库。
+编译环境
+LibRtmp编译
+
+Ubuntu 虚拟机：36~16.04.1-Ubuntu SMP Sun Feb 5 09:39:41 UTC 2017">
+<meta name="twitter:image" content="http://note.youdao.com/yws/public/resource/483b08543d472f94207dd34a2d6ea7de/xmlnote/C24D1F1C0F1146B88CC8D0C2159616D8/10736">
+
+    
+    <link rel="alternative" href="/atom.xml" title="hello,world!" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/logo.png">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <meta name="baidu-site-verification" content="g6aOnZn9cI" />
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="hello,world!" title="hello,world!"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="hello,world!">hello,world!</a></h1>
+				<h2 class="blog-motto">告诉自己，你还需要更加努力!!</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+						<form class="search" action="https://www.baidu.com/" target="_blank">
+							<label>Search</label>
+						<input name="s" type="hidden" value= null ><input type="text" name="q" size="30" placeholder="搜索"><br>
+						</form>
+					
+					</li>
+				</ul>
+			</nav>
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <meta name="baidu-site-verification" content="g6aOnZn9cI" />
+  <h1 itemprop="name">
+    
+      <a href="/2017/06/13/LibRTMP-Demo/" title="LibRTMP_Demo" itemprop="url">LibRTMP_Demo</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="小强" target="_blank" itemprop="author">小强</a>
+		
+  <p class="article-time">
+    <time datetime="2017-06-13T07:40:15.000Z" itemprop="datePublished"> 发表于 2017-06-13</time>
+
+  </p>
+</header>
+
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#LibRtmp编译并导入Android-Studio"><span class="toc-number">1.</span> <span class="toc-text">LibRtmp编译并导入Android Studio</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#简介"><span class="toc-number">1.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编译环境"><span class="toc-number">1.2.</span> <span class="toc-text">编译环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LibRtmp的编译"><span class="toc-number">1.3.</span> <span class="toc-text">LibRtmp的编译</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#编译步骤"><span class="toc-number">1.3.1.</span> <span class="toc-text">编译步骤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#通过ndk-build编译共享库"><span class="toc-number">1.3.2.</span> <span class="toc-text">通过ndk-build编译共享库</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#导入Android-Studio"><span class="toc-number">1.4.</span> <span class="toc-text">导入Android Studio</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<p>[TOC]</p>
+<h1 id="LibRtmp编译并导入Android-Studio"><a href="#LibRtmp编译并导入Android-Studio" class="headerlink" title="LibRtmp编译并导入Android Studio"></a>LibRtmp编译并导入Android Studio</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p> 做了好久的推流项目，但是没有接触过底层知识，所以只是相当于SDK的使用者。在工作不忙的时候，突然间想学一学LibRtmp。不求能完全学会，只希望能自己编译出一个可以推流的库。</p>
+<h2 id="编译环境"><a href="#编译环境" class="headerlink" title="编译环境"></a>编译环境</h2><ul>
+<li><p>LibRtmp编译</p>
+<ol>
+<li><p>Ubuntu 虚拟机：36~16.04.1-Ubuntu SMP Sun Feb 5 09:39:41 UTC 2017 i686 i686 i686 GNU/Linux</p>
+</li>
+<li><p>Android NDK：android-ndk-r10e，这里注意：我的系统是32位的，所以这个也是32位的</p>
+</li>
+</ol>
+</li>
+<li>导入Android Studio<ol>
+<li>Android Studio:版本2.3</li>
+<li>需要下载SDK Tools中的 CMake,LLDB,NDK.<h2 id="LibRtmp的编译"><a href="#LibRtmp的编译" class="headerlink" title="LibRtmp的编译"></a>LibRtmp的编译</h2></li>
+</ol>
+</li>
+</ul>
+<h3 id="编译步骤"><a href="#编译步骤" class="headerlink" title="编译步骤"></a>编译步骤</h3><ol>
+<li>保证你虚拟机中搭建了完整的环境，可以先编译NDK中的Demo试试</li>
+<li><p>编译LibRtmp需要linux中安装了Openssl。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">安装openssl</div><div class="line">sudo apt-get install openssl</div><div class="line">sudo apt-get install libssl-dev</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><strong>需要注意：</strong> 我的ubuntu安装完成后，openssl在/var/include/openssl中。执行命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">: openssl version</div><div class="line"> OpenSSL 1.0.2g  1 Mar 2016</div></pre></td></tr></table></figure></p>
+<ol>
+<li><p>下载librtmp</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mkdir librtmp #选择创建自己的目录</div><div class="line">git clone git://git.ffmpeg.org/rtmpdump</div></pre></td></tr></table></figure>
+</li>
+<li><p>配置编译环境。这一步主要是复制NDK中一些编译脚本到特定的位置。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">/home/xiaoqiang/android-ndk-r10e/build/tools/make-standalone-toolchain.sh</div><div class="line">--toolchain=arm-linux-androideabi-4.9 --platform=android-14</div><div class="line">--install-dir=/home/xiaoqiang/workspace/librtmp/utils</div></pre></td></tr></table></figure>
+</li>
+<li><p>设置环境变量。把之前复制的脚本统一加入环境变量中</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">export PATH=/home/xiaoqiang/workspace/librtmp/utils/bin:$PATH</div></pre></td></tr></table></figure>
+<p>**<br>到了这一步，说明你的编译环境已经OK了。接下来开始编译工作。</p>
+<p>编译LibRtmp需要先编译polarssl,所以我们开始polarssl的下载和编译工作<br>**</p>
+<ol>
+<li>下载polarssl并且做一个小改动</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">tar -zxvf polarssl-1.2.14-gpl.tgz #我下载的版本是1.2.14。</div><div class="line">#改动</div><div class="line"></div><div class="line">cd include/polarssl/config.h</div><div class="line">#去掉 POLARSSL_HAVEGE_C 的注释</div><div class="line"></div><div class="line">#define POLARSSL_HAVEGE_C</div></pre></td></tr></table></figure>
+<ol>
+<li>polarssl编译<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">1. 首先进入polarssl的目录中</div><div class="line">2. 执行编译命令</div><div class="line">make CC=arm-linux-androideabi-gcc APPS=</div><div class="line">3. 执行安装命令</div><div class="line">make install DESTDIR=/home/xiaoqiang/workspace/librtmp/utils/sysroot</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><strong>注意</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">1. 如果提示 arm-linux-androideabi-gcc 命令找不到，重复4，5步骤试试。如果还不行，可以使用绝对路径(其他大神说的。我没有出现这个问题)</div><div class="line">2.安装位置，必须是4，5步骤中设定的位置。否则会在编译中提示：</div><div class="line">error: cannot find -lpolarssl</div><div class="line"></div><div class="line">我解决第二个问题解决了好久，一直搞不明白</div></pre></td></tr></table></figure></p>
+<ol>
+<li>编译静态库<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">make SYS=android CROSS_COMPILE=arm-linux-androideabi- INC=&quot;-I/home/xiaoqiang/workspace/librtmp/utils/sysroot/include&quot; CRYPTO=POLARSSL</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>9.编译共享库<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">make SYS=android CROSS_COMPILE=arm-linux-androideabi- INC=&quot;-I/home/xiaoqiang/workspace/librtmp/utils/sysroot/include&quot; CRYPTO=POLARSSL SHARED=</div></pre></td></tr></table></figure></p>
+<p><strong>注意</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">1.我成功编译出了librtmp.a文件。但是在编译.so的时候出现了问题。并没有成功生成，也没有任何的提示。</div><div class="line"></div><div class="line">可能的原因是：</div><div class="line">网上有大神说是需要加入-shared参数</div><div class="line">我找到所有的MAKEFILE文件，然后在LD_FLAGS参数后面加入了-shared。</div><div class="line">很遗憾没有成功。</div></pre></td></tr></table></figure></p>
+<h3 id="通过ndk-build编译共享库"><a href="#通过ndk-build编译共享库" class="headerlink" title="通过ndk-build编译共享库"></a>通过ndk-build编译共享库</h3><p>参考大神博客：<a href="http://blog.csdn.net/a992036795/article/details/54377892" target="_blank" rel="external">http://blog.csdn.net/a992036795/article/details/54377892</a></p>
+<ul>
+<li><p>编写两个Android.mk文件</p>
+<ol>
+<li><p>在rtmpdump目录中，文件内容如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">LOCAL_PATH := $(call my-dir)</div><div class="line">subdirs := $(addprefix $(LOCAL_PATH)/,$(addsuffix /Android.mk, \ librtmp \ ))</div><div class="line">SSL := /home/blueberry/developer/android_tools/armeabi-4.9/sysroot</div><div class="line">ifndef SSL</div><div class="line">$(error &quot;You must define SSL before starting&quot;)</div><div class="line">endif</div><div class="line">include $(subdirs)</div></pre></td></tr></table></figure>
+</li>
+<li><p>在rtmpdump/librtmp目录中，新建一个Android.md文件。内容如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">LOCAL_PATH:= $(call my-dir)</div><div class="line"></div><div class="line">include $(CLEAR_VARS)</div><div class="line"></div><div class="line">LOCAL_MODULE := polarssl</div><div class="line">LOCAL_EXPORT_C_INCLUDES := $(SSL)/include</div><div class="line">LOCAL_SRC_FILES := $(SSL)/lib/libpolarssl.a</div><div class="line"></div><div class="line">include $(PREBUILT_STATIC_LIBRARY)</div><div class="line"></div><div class="line">include $(CLEAR_VARS)</div><div class="line"></div><div class="line">LOCAL_C_INCLUDES += $(NDK_PROJECT_PATH)/librtmp \</div><div class="line">$(SSL)/include</div><div class="line"></div><div class="line">LOCAL_SRC_FILES:= \</div><div class="line">    amf.c \</div><div class="line">    hashswf.c \</div><div class="line">    log.c \</div><div class="line">    parseurl.c \</div><div class="line">    rtmp.c</div><div class="line"></div><div class="line">LOCAL_STATIC_LIBRARIES = polarssl</div><div class="line">LOCAL_CFLAGS += -I$(SSL)/include -DUSE_POLARSSL</div><div class="line">LOCAL_LDLIBS += -L$(SSL)/lib -L$(SSL)/usr/lib</div><div class="line">LOCAL_LDLIBS += -lz</div><div class="line"></div><div class="line">LOCAL_MODULE := librtmp</div><div class="line"></div><div class="line">include $(BUILD_SHARED_LIBRARY)</div></pre></td></tr></table></figure>
+</li>
+<li><p>新建jni/Application.mk文件。内容如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">NDK_TOOLCHAIN_VERSION := 4.9</div><div class="line">APP_PLATFORM := android-21</div><div class="line">APP_CPPFLAGS += -DANDROID</div><div class="line">APP_ABI := armeabi-v7a</div><div class="line">APP_PROJECT_PATH := $(shell pwd)</div><div class="line">APP_BUILD_SCRIPT := $(APP_PROJECT_PATH)/Android.mk</div></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="导入Android-Studio"><a href="#导入Android-Studio" class="headerlink" title="导入Android Studio"></a>导入Android Studio</h2><ol>
+<li>新建一个Android项目，注意选择include c++ support。</li>
+<li>运行demo,看看你的环境是不是OK的。在我这边是直接可以运行的。demo中SO也动态替我编译出来了</li>
+<li><p>复制编译出来的librtmp.so到libs目录下。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">在build.gradle中增加如下配置。</div><div class="line">   sourceSets &#123;</div><div class="line">        main &#123;</div><div class="line">            jniLibs.srcDirs = ['libs']</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>在cpp目录下新建一个include目录。并吧需要用到的rtmp头文件拷贝进去。最终目录结构如下图<br><img src="http://note.youdao.com/yws/public/resource/483b08543d472f94207dd34a2d6ea7de/xmlnote/C24D1F1C0F1146B88CC8D0C2159616D8/10736" alt="image"></p>
+</li>
+<li><p>打开CMakeLists.txt文件，增加关于librtmp的配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">1.add RTMP库</div><div class="line">add_library( rtmp-lib</div><div class="line">             SHARED</div><div class="line">             IMPORTED)</div><div class="line">2. 设置RTMP库位置</div><div class="line">set_target_properties( # Specifies the target library.</div><div class="line">                       rtmp-lib</div><div class="line"></div><div class="line">                       # Specifies the parameter you want to define.</div><div class="line">                       PROPERTIES IMPORTED_LOCATION</div><div class="line"></div><div class="line">                       # Provides the path to the library you want to import.</div><div class="line">                       /Users/xiaoqiang/workspace/codec/workspace/RtmpDemo/app/libs/$&#123;ANDROID_ABI&#125;/librtmp.so )</div><div class="line">3. 增加头文件位置。这样就可以代码提示，如果没有代码提示真的写不习惯程序</div><div class="line">include_directories( src/main/cpp/include )</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><strong>注意:</strong>第二部设定的位置，必须是绝对路径，不能是相对路径，负责会报错<br>6.引用librtmp库<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">target_link_libraries( # Specifies the target library.</div><div class="line">                       native-lib</div><div class="line">                       rtmp-lib  # 这里就是使用libRTMP</div><div class="line"></div><div class="line">                       # Links the target library to the log library</div><div class="line">                       # included in the NDK.</div><div class="line">                       $&#123;log-lib&#125; )</div></pre></td></tr></table></figure></p>
+<ol>
+<li>在build.gradle中增加ndk的设定<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">defaultConfig &#123;</div><div class="line">      XXXXXXXX</div><div class="line">        ndk &#123;</div><div class="line">            abiFilters 'armeabi-v7a'</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>8.增加测试代码<br><img src="http://note.youdao.com/yws/public/resource/483b08543d472f94207dd34a2d6ea7de/xmlnote/AA59D30D240B4E13A6F9272AD60FE2FA/10767" alt="image"></p>
+<p><strong>在手机中运行。很好，没有崩溃！！！！</strong></p>
+<p>代码已经上传到github.在后期我可能会进行其他的改动！！</p>
+<p>代码位置：<a href="https://github.com/wang12/RTMPDemo.git" target="_blank" rel="external">https://github.com/wang12/RTMPDemo.git</a></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/android/">android</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/学习/">学习</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	<div class="share-jiathis">
+	  
+<div class="jiathis_style_24x24">
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_googleplus"></a>
+	<a class="jiathis_button_douban"></a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+    var jiathis_config={
+    data_track_clickback:true,
+    sm:"copy,renren,cqq",
+    pic:"",
+    summary:"",
+    
+  </script> 
+<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=
+" charset="utf-8"></script>      
+
+	 </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2017/06/08/ijkplayer/"  title="ijkplayer">
+ <strong>下一篇：</strong><br/> 
+ <span>ijkplayer
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#LibRtmp编译并导入Android-Studio"><span class="toc-number">1.</span> <span class="toc-text">LibRtmp编译并导入Android Studio</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#简介"><span class="toc-number">1.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编译环境"><span class="toc-number">1.2.</span> <span class="toc-text">编译环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LibRtmp的编译"><span class="toc-number">1.3.</span> <span class="toc-text">LibRtmp的编译</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#编译步骤"><span class="toc-number">1.3.1.</span> <span class="toc-text">编译步骤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#通过ndk-build编译共享库"><span class="toc-number">1.3.2.</span> <span class="toc-text">通过ndk-build编译共享库</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#导入Android-Studio"><span class="toc-number">1.4.</span> <span class="toc-text">导入Android Studio</span></a></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/android/" title="android">android<sup>19</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/other/" title="other">other<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/学习/" title="学习">学习<sup>7</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/bug/" title="bug">bug<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/source/" title="source">source<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/function/" title="function">function<sup>3</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://blog.csdn.net/" target="_blank" title="CSDN社区">CSDN 社区</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://developer.android.com/index.html" target="_blank" title="android developer">android developer</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://developers.google.com/vr/" target="_blank" title="google vr">google vr</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=null&verifier=3a89c19b&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p>  IT小强,希望每天都开心 <br/>
+			写给自己的博客</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/3535012745" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/827498077@qq.com" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:827498077@qq.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+	 	 博客创建日期 @ 2016.11.05 19:00
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?26cff7ff569b956a445199e85c2a0e30";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
+
